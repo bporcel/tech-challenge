@@ -1,0 +1,43 @@
+.button {
+    background-color: $white;
+    border: solid 2px;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    border-radius: 0.1em;
+    transition: 0.5s;
+    min-width: 7em;
+
+    &.primary {
+        color: $blue;
+        border-color: $blue;
+        &:hover {
+            color: $white;
+            background-color: $blue;
+            cursor: pointer;
+        }
+    }
+
+    &.secondary {
+        color: $green;
+        border-color: $green;
+        &:hover {
+            color: $white;
+            background-color: $green;
+            cursor: pointer;
+        }
+    }
+
+    &.close {
+        color: $gray; 
+        border: none;
+        background-color: $lightGray;
+        font-size: 2em;
+        padding: 0;
+        min-width: 1em;
+
+        &:hover{
+            color: $red;
+        }
+    }
+}
+

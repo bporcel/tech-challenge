@@ -1,0 +1,10 @@
+.nav-item {
+    & a {
+        text-decoration: none;
+        color: $darkGray;
+    }
+    & a.active {
+        color: $blue;
+    }
+}
+

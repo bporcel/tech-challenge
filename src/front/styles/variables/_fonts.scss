@@ -1,0 +1,14 @@
+@mixin font($fontFamily, $fontFile) {
+    @font-face {
+        font-family: $fontFamily;
+        src: url($fontFile + '.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+    }
+}
+
+@include font('Courier', '../../fonts/CourierStd');
+
+$titleFont: Courier;
+$bodyFont: 'Roboto', 'sans-serif';
+$body1: 14px;
