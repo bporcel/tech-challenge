@@ -3,7 +3,7 @@ import moment from 'moment-timezone';
 import routes from '../routes/routes';
 import EventsResponse from '../models/http/events-response.model';
 import CitiesResponse from '../models/http/cities-response.model';
-import Events,{Event} from '../models/events.model';
+import Events, { Event } from '../models/events.model';
 import Cities from '../models/cities.model';
 
 const { localhostEndPoint } = routes;
@@ -23,7 +23,8 @@ export const groupEventsByDate = (auxEvents): Events[] => {
                 name: auxEvent.name,
                 city: auxEvent.city,
                 endDate: auxEvent.endDate,
-                time: auxEvent.time,
+                from: auxEvent.from,
+                duration: auxEvent.duration,
             });
         } else {
             events.push({
@@ -35,7 +36,8 @@ export const groupEventsByDate = (auxEvents): Events[] => {
                         name: auxEvent.name,
                         city: auxEvent.city,
                         endDate: auxEvent.endDate,
-                        time: auxEvent.time,
+                        from: auxEvent.from,
+                        duration: auxEvent.duration,
                     },
                 ],
             });
@@ -50,9 +52,14 @@ const normalizeEvents = (data: EventsResponse[]): Events[] => {
 
     data.sort((a, b) => +new Date(a.startDate) - +new Date(b.startDate));
     data.forEach(event => {
+        const from = moment(event.startDate);
+        const to = moment(event.endDate);
+        const duration = moment.duration(to.diff(from));
+
         const normalizedEvent: Event = {
             ...event,
-            time: moment(event.startDate).format('HH:mm'),
+            from: from.format('HH:mm'),
+            duration: `${duration.hours()}:${duration.minutes()}`,
         };
 
         auxEvents.push({
@@ -63,19 +70,6 @@ const normalizeEvents = (data: EventsResponse[]): Events[] => {
 
     return groupEventsByDate(auxEvents);
 };
-
-// const normalizeCities = (data: CitiesResponse[]): Cities[] => {
-//     const normalizedCities: Cities[] = [];
-
-//     data.forEach((d: CitiesResponse) => {
-//         const found = normalizedCities.find(city => city.name === d.name);
-//         if (!found) {
-//             normalizedCities.push(d);
-//         }
-//     });
-
-//     return normalizedCities;
-// };
 
 export const getCities = (): Promise<Cities[]> =>
     new Promise<Cities[]>((resolve, reject) => {

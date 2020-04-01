@@ -25,10 +25,14 @@ const StyledImg = styled.img`
     width: 10%;
 `;
 
+const StyledHeader = styled.div`
+    background-color: ${Theme.colors.white};
+`;
+
 const Header: React.FC = () => {
     return (
         <>
-            <div className="d-flex flex-row align-items-center pd-1">
+            <StyledHeader className="d-flex flex-row align-items-center pd-1">
                 <StyledImg src={logo} alt="trivago logo" className="ml-1" />
                 <nav className="menu">
                     <ul className="inline-list mr-0 pd-0">
@@ -48,7 +52,7 @@ const Header: React.FC = () => {
                         </StyledLi>
                     </ul>
                 </nav>
-            </div>
+            </StyledHeader>
             <hr className="separator mr-0" />
         </>
     );

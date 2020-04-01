@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import moment from 'moment';
 import {
     getCities,
     getEvents,
@@ -129,7 +128,7 @@ const AllEvents: React.FC = () => {
         modalSignUp: literals.modalSignUp,
         x: literals.x,
         availableEvents: literals.availableEvents,
-        noEvents: literals.noEvents,
+        noFilterEvents: literals.noFilterEvents,
         reset: literals.reset,
         eventName: literals.eventName,
         city: literals.city,

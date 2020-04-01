@@ -10,7 +10,6 @@ export default interface Literals {
     modalSignUp?: string;
     x?: string;
     myEventsEmpty?: string;
-    here?: string;
     availableEvents?: string;
     noEvents?: string;
     eventName?: string;
@@ -18,4 +17,5 @@ export default interface Literals {
     reset?: string;
     from?: string;
     to?: string;
+    noFilterEvents?: string;
 }

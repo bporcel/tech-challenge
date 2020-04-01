@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import Theme from '../../styles/theme';
 import Literals from '../../models/literals.model';
 import Events, { Event } from '../../models/events.model';
 import Cities from '../../models/cities.model';
 import Card from '../organisms/card.organism';
 import Modal from '../molecules/modal.molecule';
 import Filter from '../organisms/filter.organism';
+import NoContent from '../pages/no-content.page';
+
+const StyledError = styled.span`
+    color: ${Theme.colors.red};
+    font-size: ${Theme.font.size.body2};
+`;
 
 interface Props {
     events: Events[];
@@ -77,28 +85,33 @@ const AllEventsTemplate: React.FC<Props> = ({
 
     return (
         <div>
-            <div className={`${toogleModal ? 'modal-blur' : ''}`}>
-                <h1 className="title">
-                    {events.length > 0
-                        ? literals.availableEvents
-                        : literals.noEvents}
-                </h1>
-                <Filter
-                    literals={filterLiterals}
-                    {...{ allEvents }}
-                    {...{ cities }}
-                    {...{ handleFilterEvents }}
-                />
-                {renderEvents()}
-            </div>
-            {toogleModal && (
-                <Modal
-                    event={currentModalEvent}
-                    {...{ handleClickToogleModal }}
-                    {...{ handleClickSignUp }}
-                    {...{ handleClickJoin }}
-                    literals={modalLiterals}
-                />
+            {allEvents.length > 0 ? (
+                <>
+                    <div className={`${toogleModal ? 'modal-blur' : ''}`}>
+                        <h1 className="title">{literals.availableEvents}</h1>
+                        <Filter
+                            literals={filterLiterals}
+                            {...{ allEvents }}
+                            {...{ cities }}
+                            {...{ handleFilterEvents }}
+                        />
+                        {events.length <= 0 && (
+                            <StyledError>{literals.noFilterEvents}</StyledError>
+                        )}
+                        {renderEvents()}
+                    </div>
+                    {toogleModal && (
+                        <Modal
+                            event={currentModalEvent}
+                            {...{ handleClickToogleModal }}
+                            {...{ handleClickSignUp }}
+                            {...{ handleClickJoin }}
+                            literals={modalLiterals}
+                        />
+                    )}
+                </>
+            ) : (
+                <NoContent />
             )}
         </div>
     );

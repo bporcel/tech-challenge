@@ -31,7 +31,8 @@ const EventRow: React.FC<Props> = ({
     return (
         <div className="d-flex flex-row align-items-center justify-between pd-1">
             <Event
-                time={event.time}
+                from={event.from}
+                duration={event.duration}
                 title={event.name}
                 isFree={event.isFree}
                 location={event.city}

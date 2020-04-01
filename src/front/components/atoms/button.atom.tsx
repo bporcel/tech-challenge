@@ -11,6 +11,10 @@ const StyledButton = styled.button`
     border-radius: 0.1em;
     min-width: 7em;
 
+    &:focus {
+        outline: none;
+    }
+
     ${({ type }) =>
         (type === 'primary' &&
             css`

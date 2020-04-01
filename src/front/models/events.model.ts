@@ -5,7 +5,8 @@ export interface Event {
     name: string;
     city: string | number;
     endDate: string;
-    time: string;
+    from: string;
+    duration: string;
 }
 
 export default interface Events {

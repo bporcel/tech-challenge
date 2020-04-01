@@ -23,8 +23,12 @@ module.exports = {
                 loader: 'awesome-typescript-loader',
             },
             {
-                test: /\.(otf|png)$/,
+                test: /\.png$/,
                 use: 'file-loader',
+            },
+            {
+                test: /\.otf$/,
+                use: 'url-loader',
             },
         ],
     },

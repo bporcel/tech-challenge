@@ -39,9 +39,7 @@ const Card: React.FC<Props> = ({
                     {...{ initialButtonText }}
                     {...{ handleClickButton }}
                 />
-                {index < events.length - 1 ? (
-                    <hr className="separator" />
-                ) : null}
+                {index < events.length - 1 && <hr className="separator" />}
             </div>
         ));
 

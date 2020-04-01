@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import Theme from './theme';
+// @ts-ignore
+import CourierStd from '../../fonts/CourierStd.otf'
 
 const GlobalStyles = createGlobalStyle`
 body {
@@ -7,10 +9,13 @@ body {
     font-family: ${Theme.font.family.roboto};
     font-size: ${Theme.font.size.body1};
 }
+html{
+    background-color: ${Theme.colors.lightGray}
+}
 
 @font-face {
     font-family: ${Theme.font.family.courier};
-    src: url(../../fonts/CourierStd.otf) format(opentype);
+    src: url(${CourierStd}) format('opentype');
     font-weight: normal;
     font-style: normal;
 }

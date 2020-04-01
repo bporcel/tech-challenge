@@ -22,7 +22,8 @@ const StyledDiv = styled.div`
 `;
 
 interface Props {
-    time: string;
+    from: string;
+    duration: string;
     title: string;
     isFree: boolean;
     location: string | number;
@@ -30,16 +31,18 @@ interface Props {
 }
 
 const Event: React.FC<Props> = ({
-    time,
+    from,
+    duration,
     title,
     isFree,
     location,
     literals,
 }) => {
+
     return (
         <div className="d-flex flex-row">
             <StyledDiv time className="pd-1">
-                {time}
+                {from}
             </StyledDiv>
             <div className="d-flex flex-column">
                 <div className="d-flex flex-row">
@@ -49,7 +52,7 @@ const Event: React.FC<Props> = ({
                     </StyledDiv>
                 </div>
                 <StyledDiv location className="pl-1">
-                    {location}
+                    {`${location} - ${duration}h`}
                 </StyledDiv>
             </div>
         </div>
