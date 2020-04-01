@@ -9,4 +9,13 @@ export default interface Literals {
     join?: string;
     modalSignUp?: string;
     x?: string;
+    myEventsEmpty?: string;
+    here?: string;
+    availableEvents?: string;
+    noEvents?: string;
+    eventName?: string;
+    city?: string;
+    filter?: string;
+    from?: string;
+    to?: string;
 }

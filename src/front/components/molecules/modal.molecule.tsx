@@ -3,7 +3,6 @@ import Button from '../atoms/button.atom';
 import { Event } from '../../models/events.model';
 import Literals from '../../models/literals.model';
 
-
 interface Props {
     event: Event;
     literals: Literals;
@@ -17,6 +16,12 @@ const Modal: React.FC<Props> = ({
     event,
     literals,
 }) => {
+    document.onkeydown = (event) => {
+        if (event.key === 'Escape') {
+            handleClickToogleModal();
+        }
+    }
+
     const formatModalText = (): string => {
         const literalList = literals.modalSignUp.split('$');
         return `${literalList[0]}${event.name}${literalList[1]}${event.date}${literalList[2]}${event.city}`;

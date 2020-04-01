@@ -1,16 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import literals from '../../i18n/en.json';
+import literals from '../../resources/i18n/en.json';
+// @ts-ignore
+import logo from '../../resources/images/logo.png';
 
-type Props = {};
-
-const Header: React.FC<Props> = () => {
+const Header: React.FC = () => {
     return (
-        <div>
-            <div className="d-flex flex-row pd-1">
-                <div>LOGO</div>
-                <nav>
-                    <ul className="inline-list mr-0">
+        <>
+            <div className="d-flex flex-row align-items-center pd-1">
+                <img src={logo} alt="trivago logo" className="logo" />
+                <nav className="menu">
+                    <ul className="inline-list mr-0 pd-0">
                         <li className="nav-item pl-1">
                             <NavLink exact to="/" activeClassName="active">
                                 {literals.allEvents}
@@ -29,7 +29,7 @@ const Header: React.FC<Props> = () => {
                 </nav>
             </div>
             <hr className="separator mr-0" />
-        </div>
+        </>
     );
 };
 

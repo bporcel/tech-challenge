@@ -1,13 +1,15 @@
 import React from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 import Card from '../organisms/card.organism';
 import Events from '../../models/events.model';
 import Literals from '../../models/literals.model';
+import NoContent from '../pages/no-content.page';
 
 interface Props {
     events: Events[];
     literals: Literals;
     handleClickCancelEvent: Function;
-};
+}
 
 const MyEventsTemplate: React.FC<Props> = ({
     events,
@@ -36,8 +38,13 @@ const MyEventsTemplate: React.FC<Props> = ({
 
     return (
         <div>
-            <h1 className="title">{literals.myNextEvents}</h1>
-            {renderEvents()}
+            {events.length > 0 ? (
+                <h1 className="title">{literals.myNextEvents}</h1>
+            ) : (
+                <NoContent />
+            )}
+
+            <div>{renderEvents()}</div>
         </div>
     );
 };

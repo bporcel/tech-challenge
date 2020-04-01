@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
-import Card from '../organisms/card.organism';
-import Modal from '../molecules/modal.molecule';
 import Literals from '../../models/literals.model';
 import Events, { Event } from '../../models/events.model';
+import Cities from '../../models/cities.model';
+import Card from '../organisms/card.organism';
+import Modal from '../molecules/modal.molecule';
+import Filter from '../organisms/filter.organism';
 
 interface Props {
     events: Events[];
+    allEvents: Events[];
+    cities: Cities[];
     literals: Literals;
     handleClickJoin: Function;
+    handleClickFilterEvents: Function;
 }
 
 const AllEventsTemplate: React.FC<Props> = ({
     events,
+    allEvents,
+    cities,
     literals,
     handleClickJoin,
+    handleClickFilterEvents,
 }) => {
     const [toogleModal, setToogleModal] = useState<boolean>(false);
     const [currentModalEvent, setCurrentModalEvent] = useState<Event>();
@@ -30,20 +38,9 @@ const AllEventsTemplate: React.FC<Props> = ({
     };
 
     const handleClickToogleModal = (): void => {
+        console.log('patata');
         setToogleModal(!toogleModal);
     };
-
-    const modalLiterals = {
-        modalSignUp: literals.modalSignUp,
-        cancel: literals.cancel,
-        join: literals.join,
-        x: literals.x,
-    };
-
-    const cardLiterals = {
-        signUp: literals.signUp,
-        free: literals.free,
-    }
 
     const renderEvents = (): JSX.Element[] =>
         events.map((event: any, index: number) => (
@@ -58,9 +55,41 @@ const AllEventsTemplate: React.FC<Props> = ({
             </div>
         ));
 
+    const modalLiterals = {
+        modalSignUp: literals.modalSignUp,
+        cancel: literals.cancel,
+        join: literals.join,
+        x: literals.x,
+    };
+
+    const cardLiterals = {
+        signUp: literals.signUp,
+        free: literals.free,
+    };
+
+    const filterLiterals = {
+        filter: literals.filter,
+        eventName: literals.eventName,
+        city: literals.city,
+        from: literals.from,
+        to: literals.to,
+        free: literals.free,
+    };
+
     return (
         <div>
             <div className={`${toogleModal ? 'modal-blur' : ''}`}>
+                <h1 className="title">
+                    {events.length > 0
+                        ? literals.availableEvents
+                        : literals.noEvents}
+                </h1>
+                <Filter
+                    literals={filterLiterals}
+                    {...{ allEvents }}
+                    {...{ cities }}
+                    {...{ handleClickFilterEvents }}
+                />
                 {renderEvents()}
             </div>
             {toogleModal && (

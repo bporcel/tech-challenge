@@ -40,7 +40,7 @@ const Card: React.FC<Props> = ({
 
     return (
         <div>
-            <div className="bordered pd-1 card">{renderRows()}</div>
+            <div className="bordered card">{renderRows()}</div>
         </div>
     );
 };

@@ -18,15 +18,15 @@ const Event: React.FC<Props> = ({
 }) => {
     return (
         <div className="d-flex flex-row">
-            <div className="pd-1">{time}</div>
+            <div className="pd-1 time">{time}</div>
             <div className="d-flex flex-column">
                 <div className="d-flex flex-row">
                     <div className="pd-1">{title}</div>
-                    <div className="pd-1">
+                    <div className="pd-1 free">
                         {isFree ? `${literals.free}` : ''}
                     </div>
                 </div>
-                <div className="pl-1">{location}</div>
+                <div className="pl-1 location">{location}</div>
             </div>
         </div>
     );

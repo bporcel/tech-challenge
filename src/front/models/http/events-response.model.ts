@@ -2,7 +2,7 @@ export default interface EventsResponse {
     id: number;
     isFree: boolean;
     name: string;
-    city: number;
+    city: number | string;
     startDate: string;
     endDate: string;
 }

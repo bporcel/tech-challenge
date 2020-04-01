@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import literals from '../../i18n/en.json';
+import literals from '../../resources/i18n/en.json';
 import Events, {Event} from '../../models/events.model';
 import MyEventsTemplate from '../templates/my-events.template';
 
@@ -37,6 +37,8 @@ const MyEvents: React.FC = () => {
         youreIn: literals.youreIn,
         cancel: literals.cancel,
         free: literals.free,
+        myEventsEmpty: literals.myEventsEmpty,
+        here: literals.here
     };
 
     const handleClickCancelEvent = (myEvent: Event): void => {

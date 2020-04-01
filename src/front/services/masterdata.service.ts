@@ -1,31 +1,20 @@
 import { get } from './http.service';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import routes from '../routes/routes';
 import EventsResponse from '../models/http/events-response.model';
 import CitiesResponse from '../models/http/cities-response.model';
-import Events from '../models/events.model';
+import Events,{Event} from '../models/events.model';
+import Cities from '../models/cities.model';
 
 const { localhostEndPoint } = routes;
 
-const normalizeEvents = (data: EventsResponse[]): Events[] => {
+export const groupEventsByDate = (auxEvents): Events[] => {
     const events: Events[] = [];
-    const auxEvents: EventsResponse[] = [];
-
-    data.sort((a, b) => +new Date(a.startDate) - +new Date(b.startDate));
-    data.forEach(event => {
-        auxEvents.push({
-            ...event,
-            startDate: moment(event.startDate).format('dddd Do MMMM-hh:mm'),
-        });
-    });
 
     auxEvents.forEach(auxEvent => {
-        const auxStartDate = auxEvent.startDate.split('-')[0];
-        const auxTime = auxEvent.startDate.split('-')[1];
+        const auxStartDate = auxEvent.startDate;
 
-        const found = events.find(
-            event => auxStartDate === event.startDate.split('-')[0]
-        );
+        const found = events.find(event => auxStartDate === event.startDate);
 
         if (found) {
             found.events.push({
@@ -34,7 +23,7 @@ const normalizeEvents = (data: EventsResponse[]): Events[] => {
                 name: auxEvent.name,
                 city: auxEvent.city,
                 endDate: auxEvent.endDate,
-                time: auxEvent.startDate.split('-')[1],
+                time: auxEvent.time,
             });
         } else {
             events.push({
@@ -46,7 +35,7 @@ const normalizeEvents = (data: EventsResponse[]): Events[] => {
                         name: auxEvent.name,
                         city: auxEvent.city,
                         endDate: auxEvent.endDate,
-                        time: auxTime,
+                        time: auxEvent.time,
                     },
                 ],
             });
@@ -56,12 +45,42 @@ const normalizeEvents = (data: EventsResponse[]): Events[] => {
     return events;
 };
 
-export const getCities = (): Promise<CitiesResponse[]> =>
-    new Promise<CitiesResponse[]>((resolve, reject) => {
+const normalizeEvents = (data: EventsResponse[]): Events[] => {
+    const auxEvents: EventsResponse[] = [];
+
+    data.sort((a, b) => +new Date(a.startDate) - +new Date(b.startDate));
+    data.forEach(event => {
+        const normalizedEvent: Event = {
+            ...event,
+            time: moment(event.startDate).format('HH:mm'),
+        };
+
+        auxEvents.push({
+            ...normalizedEvent,
+            startDate: moment(event.startDate).format('dddd Do MMMM'),
+        });
+    });
+
+    return groupEventsByDate(auxEvents);
+};
+
+// const normalizeCities = (data: CitiesResponse[]): Cities[] => {
+//     const normalizedCities: Cities[] = [];
+
+//     data.forEach((d: CitiesResponse) => {
+//         const found = normalizedCities.find(city => city.name === d.name);
+//         if (!found) {
+//             normalizedCities.push(d);
+//         }
+//     });
+
+//     return normalizedCities;
+// };
+
+export const getCities = (): Promise<Cities[]> =>
+    new Promise<Cities[]>((resolve, reject) => {
         get<CitiesResponse[]>(`${localhostEndPoint}/cities`)
-            .then(data => {
-                resolve(data);
-            })
+            .then(resolve)
             .catch(reject);
     });
 

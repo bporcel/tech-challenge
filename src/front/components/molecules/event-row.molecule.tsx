@@ -10,7 +10,7 @@ interface Props {
     isButtonHovereable: boolean;
     initialButtonText: string;
     handleClickButton: Function;
-};
+}
 
 const EventRow: React.FC<Props> = ({
     event,
@@ -29,7 +29,7 @@ const EventRow: React.FC<Props> = ({
     };
 
     return (
-        <div className="d-flex flex-row align-items-center justify-between">
+        <div className="d-flex flex-row align-items-center justify-between pd-1">
             <Event
                 time={event.time}
                 title={event.name}

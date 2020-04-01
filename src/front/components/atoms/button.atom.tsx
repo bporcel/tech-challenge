@@ -1,5 +1,47 @@
 import React, { useState } from 'react';
-import Literals from '../../models/literals.model'
+import styled, { css } from 'styled-components';
+import Theme from '../../styles/theme';
+import Literals from '../../models/literals.model';
+
+const StyledButton = styled.button`
+    background-color: ${Theme.colors.white};
+    border: solid 2px;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    border-radius: 0.1em;
+    min-width: 7em;
+
+    ${({ type }) =>
+        (type === 'primary' &&
+            css`
+                color: ${Theme.colors.blue};
+                border-color: ${Theme.colors.blue};
+                &:hover {
+                    color: ${Theme.colors.white};
+                    background-color: ${Theme.colors.blue};
+                    cursor: pointer;
+                }
+            `) ||
+        (type === 'secondary' &&
+            css`
+                color: ${Theme.colors.green};
+                border-color: ${Theme.colors.green};
+                &:hover {
+                    color: ${Theme.colors.white};
+                    background-color: ${Theme.colors.green};
+                    cursor: pointer;
+                }
+            `) ||
+        (type === 'close' &&
+            css`
+                color: ${Theme.colors.gray};
+                border: none;
+                background-color: ${Theme.colors.lightGray};
+                font-size: 2em;
+                padding: 0;
+                min-width: 1em;
+            `)}
+`;
 
 interface Props {
     type: 'primary' | 'secondary' | 'close';
@@ -8,7 +50,7 @@ interface Props {
     isHovereable?: boolean;
     literals?: Literals;
     handleClick: Function;
-};
+}
 
 const Button: React.FC<Props> = ({
     type,
@@ -36,15 +78,15 @@ const Button: React.FC<Props> = ({
     };
 
     return (
-        <button
+        <StyledButton
             {...{ id }}
-            className={`button ${type}`}
+            {...{ type }}
             onClick={handleClickMiddleman}
             onMouseOver={handleHover}
             onMouseOut={handleHover}
         >
             {text}
-        </button>
+        </StyledButton>
     );
 };
 

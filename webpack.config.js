@@ -37,9 +37,9 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(otf|ttf)$/,
-                use: 'file-loader'
-            }
+                test: /\.(otf|png)$/,
+                use: 'file-loader',
+            },
         ],
     },
     devServer: {
