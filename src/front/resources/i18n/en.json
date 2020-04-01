@@ -1,0 +1,21 @@
+{
+    "allEvents": "All events",
+    "availableEvents": "These are our available events",
+    "cancel": "Cancel",
+    "city": "City",
+    "eventName": "Event name",
+    "filter": "Filter",
+    "free": "Free!!",
+    "from": "From",
+    "here": "here",
+    "join": "Join",
+    "modalSignUp": "You are about to sign up for $. This event takes place the $ in $.",
+    "myEvents": "My events",
+    "myEventsEmpty": "You are not subscribed to any event yet. Click $ to start looking for events you could be interested in. Hurry up!",
+    "myNextEvents": "My next tech events",
+    "noEvents": "At this moment, we don't have any available events. Come back soon!",
+    "signUp": "Sign up",
+    "to": "To",
+    "x": "X",
+    "youreIn": "You're in"
+}
