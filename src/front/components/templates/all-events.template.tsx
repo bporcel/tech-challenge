@@ -12,7 +12,7 @@ interface Props {
     cities: Cities[];
     literals: Literals;
     handleClickJoin: Function;
-    handleClickFilterEvents: Function;
+    handleFilterEvents: Function;
 }
 
 const AllEventsTemplate: React.FC<Props> = ({
@@ -21,7 +21,7 @@ const AllEventsTemplate: React.FC<Props> = ({
     cities,
     literals,
     handleClickJoin,
-    handleClickFilterEvents,
+    handleFilterEvents,
 }) => {
     const [toogleModal, setToogleModal] = useState<boolean>(false);
     const [currentModalEvent, setCurrentModalEvent] = useState<Event>();
@@ -38,7 +38,6 @@ const AllEventsTemplate: React.FC<Props> = ({
     };
 
     const handleClickToogleModal = (): void => {
-        console.log('patata');
         setToogleModal(!toogleModal);
     };
 
@@ -68,7 +67,7 @@ const AllEventsTemplate: React.FC<Props> = ({
     };
 
     const filterLiterals = {
-        filter: literals.filter,
+        reset: literals.reset,
         eventName: literals.eventName,
         city: literals.city,
         from: literals.from,
@@ -88,7 +87,7 @@ const AllEventsTemplate: React.FC<Props> = ({
                     literals={filterLiterals}
                     {...{ allEvents }}
                     {...{ cities }}
-                    {...{ handleClickFilterEvents }}
+                    {...{ handleFilterEvents }}
                 />
                 {renderEvents()}
             </div>

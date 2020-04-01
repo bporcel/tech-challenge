@@ -15,7 +15,7 @@ export default interface Literals {
     noEvents?: string;
     eventName?: string;
     city?: string;
-    filter?: string;
+    reset?: string;
     from?: string;
     to?: string;
 }

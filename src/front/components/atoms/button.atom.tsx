@@ -40,11 +40,21 @@ const StyledButton = styled.button`
                 font-size: 2em;
                 padding: 0;
                 min-width: 1em;
+            `) ||
+        (type === 'cancel' &&
+            css`
+                color: ${Theme.colors.red};
+                border-color: ${Theme.colors.red};
+                &:hover {
+                    color: ${Theme.colors.white};
+                    background-color: ${Theme.colors.red};
+                    cursor: pointer;
+                }
             `)}
 `;
 
 interface Props {
-    type: 'primary' | 'secondary' | 'close';
+    type: 'primary' | 'secondary' | 'close' | 'cancel';
     initialText: string;
     id?: string;
     isHovereable?: boolean;
@@ -63,8 +73,7 @@ const Button: React.FC<Props> = ({
     const [text, setText] = useState(initialText);
 
     const handleClickMiddleman = ({ target }) => {
-        const { id } = target;
-        handleClick(id);
+        handleClick(target);
     };
 
     const handleHover = (): void => {

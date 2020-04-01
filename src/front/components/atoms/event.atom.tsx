@@ -1,5 +1,25 @@
 import React from 'react';
-import Literals from '../../models/literals.model'
+import styled, { css } from 'styled-components';
+import Theme from '../../styles/theme';
+import Literals from '../../models/literals.model';
+
+const StyledDiv = styled.div`
+    ${props =>
+        (props.location &&
+            css`
+                font-size: ${Theme.font.size.body2};
+                color: ${Theme.colors.darkGray};
+            `) ||
+        (props.free &&
+            css`
+                color: ${Theme.colors.green};
+                font-weight: bold;
+            `) ||
+        (props.time &&
+            css`
+                font-size: ${Theme.font.size.bodyBig};
+            `)}
+`;
 
 interface Props {
     time: string;
@@ -7,7 +27,7 @@ interface Props {
     isFree: boolean;
     location: string | number;
     literals: Literals;
-};
+}
 
 const Event: React.FC<Props> = ({
     time,
@@ -18,15 +38,19 @@ const Event: React.FC<Props> = ({
 }) => {
     return (
         <div className="d-flex flex-row">
-            <div className="pd-1 time">{time}</div>
+            <StyledDiv time className="pd-1">
+                {time}
+            </StyledDiv>
             <div className="d-flex flex-column">
                 <div className="d-flex flex-row">
                     <div className="pd-1">{title}</div>
-                    <div className="pd-1 free">
+                    <StyledDiv free className="pd-1">
                         {isFree ? `${literals.free}` : ''}
-                    </div>
+                    </StyledDiv>
                 </div>
-                <div className="pl-1 location">{location}</div>
+                <StyledDiv location className="pl-1">
+                    {location}
+                </StyledDiv>
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useEffect } from 'react';
+import useFormState from '../../hooks/form-hooks.hook';
 import Events, { Event } from '../../models/events.model';
 import Cities from '../../models/cities.model';
 import Literals from '../../models/literals.model';
@@ -11,15 +12,29 @@ interface Props {
     allEvents: Events[];
     cities: Cities[];
     literals: Literals;
-    handleClickFilterEvents: Function;
+    handleFilterEvents: Function;
 }
 
 const Filter: React.FC<Props> = ({
     allEvents,
     cities,
     literals,
-    handleClickFilterEvents,
+    handleFilterEvents,
 }) => {
+    const filterValues = {
+        name: '',
+        city: '',
+        from: '',
+        to: '',
+        isFree: false,
+    };
+
+    const [filterState, setFilterState] = useFormState(filterValues);
+
+    useEffect(() => {
+        handleFilterEvents(filterState);
+    }, [filterState]);
+
     const normalizeEvents = (): Event[] => {
         const normalizedEvents = [];
         allEvents.forEach(({ events }) => {
@@ -34,25 +49,6 @@ const Filter: React.FC<Props> = ({
         return normalizedEvents;
     };
 
-    const filterValues = useRef({
-        name: '',
-        city: '',
-        from: '',
-        to: '',
-        isFree: false,
-    });
-
-    const setFilterValues = (id, value): void => {
-        filterValues.current = {
-            ...filterValues.current,
-            [id]: value,
-        };
-    };
-
-    const filterEvents = (): void => {
-        handleClickFilterEvents(filterValues.current);
-    };
-
     const timeRangeLiterals = {
         from: literals.from,
         to: literals.to,
@@ -64,39 +60,47 @@ const Filter: React.FC<Props> = ({
                 <Predictive
                     id="events"
                     inputId="name"
+                    value={filterState['name']}
                     label={literals.eventName}
                     options={normalizeEvents()}
-                    setForm={setFilterValues}
+                    handleChange={setFilterState}
                 />
                 <div className="pl-1">
                     <Predictive
-                        inputId="city"
                         id="cities"
+                        inputId="city"
+                        value={filterState['city']}
                         label={literals.city}
                         options={cities}
-                        setForm={setFilterValues}
+                        handleChange={setFilterState}
                     />
                 </div>
                 <div className="d-flex flex-row pl-1">
                     <TimeRange
+                        values={{
+                            from: filterState['from'],
+                            to: filterState['to'],
+                        }}
                         literals={timeRangeLiterals}
-                        {...{ setFilterValues }}
+                        handleChange={setFilterState}
                     />
                 </div>
                 <div className="pl-1">
                     <CheckBox
                         id="isFree"
+                        checked={filterState['isFree']}
                         label={literals.free}
-                        setForm={setFilterValues}
+                        handleChange={setFilterState}
                     />
                 </div>
             </div>
 
-            <div className="pl-1">
+            <div className="pl-1 d-flex flex-column">
                 <Button
-                    type="secondary"
-                    initialText={literals.filter}
-                    handleClick={filterEvents}
+                    id="reset"
+                    type="primary"
+                    initialText={literals.reset}
+                    handleClick={setFilterState}
                 />
             </div>
         </div>

@@ -82,6 +82,14 @@ body {
         display: block;
     }
 }
+
+.modal-blur {
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+}
 `;
 
 export default GlobalStyles;

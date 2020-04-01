@@ -23,20 +23,6 @@ module.exports = {
                 loader: 'awesome-typescript-loader',
             },
             {
-                test: /\.scss$/,
-                use: [
-                    {
-                        loader: 'style-loader',
-                    },
-                    {
-                        loader: 'css-loader',
-                    },
-                    {
-                        loader: 'sass-loader',
-                    },
-                ],
-            },
-            {
                 test: /\.(otf|png)$/,
                 use: 'file-loader',
             },

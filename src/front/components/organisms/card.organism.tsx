@@ -1,7 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
+import Theme from '../../styles/theme';
 import EventRow from '../molecules/event-row.molecule';
 import { Event } from '../../models/events.model';
 import Literals from '../../models/literals.model';
+
+const StyledCard = styled.div`
+    background-color: ${Theme.colors.white};
+    min-width: 60em;
+`;
 
 interface Props {
     events: Event[];
@@ -9,7 +16,7 @@ interface Props {
     isButtonHovereable?: boolean;
     initialButtonText: string;
     handleClickButton: Function;
-};
+}
 
 const Card: React.FC<Props> = ({
     events,
@@ -40,7 +47,7 @@ const Card: React.FC<Props> = ({
 
     return (
         <div>
-            <div className="bordered card">{renderRows()}</div>
+            <StyledCard className="bordered">{renderRows()}</StyledCard>
         </div>
     );
 };

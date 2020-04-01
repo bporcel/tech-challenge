@@ -70,7 +70,7 @@ const AllEvents: React.FC = () => {
         return found;
     };
 
-    const handleClickFilterEvents = (filterValues): void => {
+    const handleFilterEvents = (filterValues): void => {
         let filteredEvents = [];
         if (filterValues.isFree === false) {
             filterValues.isFree = '';
@@ -104,7 +104,7 @@ const AllEvents: React.FC = () => {
         setFilteredEvents(groupEventsByDate(filteredEvents));
     };
 
-    const handleClickJoin = (id: string): void => {
+    const handleClickJoin = ({ id }): void => {
         let event;
 
         filteredEvents.forEach(eventGroup => {
@@ -130,7 +130,7 @@ const AllEvents: React.FC = () => {
         x: literals.x,
         availableEvents: literals.availableEvents,
         noEvents: literals.noEvents,
-        filter: literals.filter,
+        reset: literals.reset,
         eventName: literals.eventName,
         city: literals.city,
         from: literals.from,
@@ -143,7 +143,7 @@ const AllEvents: React.FC = () => {
         cities,
         literals: templateLiterals,
         handleClickJoin,
-        handleClickFilterEvents,
+        handleFilterEvents,
     };
 
     return <AllEventsTemplate {...props} />;

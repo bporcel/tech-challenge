@@ -4,24 +4,27 @@ import TimeInput from '../atoms/time-input.atom';
 
 interface Props {
     literals: Literals;
-    setFilterValues: Function;
+    values: any;
+    handleChange: any;
 }
 
-const TimeRange: React.FC<Props> = ({ literals, setFilterValues }) => {
+const TimeRange: React.FC<Props> = ({ literals, values, handleChange }) => {
     return (
         <div className="d-flex flex-row">
             <div>
                 <TimeInput
                     id="from"
+                    value={values['from']}
                     label={literals.from}
-                    setForm={setFilterValues}
+                    {...{ handleChange }}
                 />
             </div>
             <div className="pl-1">
                 <TimeInput
                     id="to"
+                    value={values['to']}
                     label={literals.to}
-                    setForm={setFilterValues}
+                    {...{ handleChange }}
                 />
             </div>
         </div>

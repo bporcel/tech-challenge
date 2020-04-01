@@ -3,19 +3,24 @@ import React from 'react';
 interface Props {
     id: string;
     label: string;
-    setForm: Function;
+    value: string;
+    handleChange: Function;
 }
 
-const TimeInput: React.FC<Props> = ({ id, label, setForm }) => {
-    const handleChange = ({ target }): void => {
-        const { id, value } = target;
-        setForm(id, value);
+const TimeInput: React.FC<Props> = ({ id, label, value, handleChange }) => {
+    const handleChangeMiddleman = ({ target }): void => {
+        handleChange(target);
     };
 
     return (
         <div className="input-form">
             <label htmlFor={id}>{label}</label>
-            <input {...{ id }} type="time" onChange={handleChange} />
+            <input
+                {...{ id }}
+                {...{ value }}
+                type="time"
+                onChange={handleChangeMiddleman}
+            />
         </div>
     );
 };

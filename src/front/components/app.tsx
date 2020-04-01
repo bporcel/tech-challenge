@@ -4,7 +4,6 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyles from '../styles/global-styles';
 import Theme from '../styles/theme';
 import moment from 'moment-timezone';
-import '../styles/global.scss';
 import AllEvents from './pages/all-events.page';
 import MyEvents from './pages/my-events.page';
 import NoContent from './pages/no-content.page';

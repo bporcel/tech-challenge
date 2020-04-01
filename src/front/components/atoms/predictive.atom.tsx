@@ -1,15 +1,23 @@
-import React, { cloneElement } from 'react';
+import React from 'react';
 import IdName from '../../models/id-name.model';
 
 interface Props {
     id: string;
     inputId: string;
+    value: string;
     options: IdName[];
     label: string;
-    setForm: Function;
+    handleChange: Function;
 }
 
-const Select: React.FC<Props> = ({ id, inputId, options, label, setForm }) => {
+const Select: React.FC<Props> = ({
+    id,
+    inputId,
+    value,
+    options,
+    label,
+    handleChange,
+}) => {
     const renderOptions = () => {
         const listOptions: IdName[] = [];
 
@@ -25,15 +33,19 @@ const Select: React.FC<Props> = ({ id, inputId, options, label, setForm }) => {
         ));
     };
 
-    const handleChange = ({ target }) => {
-        const { id, value } = target;
-        setForm(id, value);
+    const handleChangeMiddleman = ({ target }) => {
+        handleChange(target);
     };
 
     return (
         <div className="input-form">
             <label htmlFor={inputId}>{label}</label>
-            <input id={inputId} list={id} onChange={handleChange} />
+            <input
+                id={inputId}
+                {...{ value }}
+                list={id}
+                onChange={handleChangeMiddleman}
+            />
             <datalist {...{ id }}>{renderOptions()}</datalist>
         </div>
     );
