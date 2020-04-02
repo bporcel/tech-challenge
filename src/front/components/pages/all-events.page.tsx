@@ -3,7 +3,7 @@ import {
     getCities,
     getEvents,
     groupEventsByDate,
-    normalizeEvents,
+    getNormalizedEvents,
 } from '../../services/masterdata.service';
 import literals from '../../resources/i18n/en.json';
 import Events from '../../models/events.model';
@@ -25,12 +25,10 @@ const AllEvents: React.FC = () => {
         if (cities.length > 0) {
             getEvents().then(eventsRes => {
                 events.current = eventsRes;
-                normalizedEvents.current = mapEventsAndCities(
-                    normalizeEvents(eventsRes)
-                );
-                setFilteredEvents(
-                    mapEventsAndCities(normalizeEvents(eventsRes))
-                );
+            });
+            getNormalizedEvents().then(eventsRes => {
+                normalizedEvents.current = mapEventsAndCities(eventsRes);
+                setFilteredEvents(mapEventsAndCities(eventsRes));
             });
         }
     }, [cities]);

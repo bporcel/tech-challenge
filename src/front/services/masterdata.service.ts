@@ -83,8 +83,15 @@ export const getCities = (): Promise<Cities[]> =>
 export const getEvents = (): Promise<EventsResponse[]> =>
     new Promise<EventsResponse[]>((resolve, reject) => {
         get<EventsResponse[]>(`${localhostEndPoint}/events`)
+            .then(resolve)
+            .catch(reject);
+    });
+
+export const getNormalizedEvents = (): Promise<Events[]> =>
+    new Promise<Events[]>((resolve, reject) => {
+        get<EventsResponse[]>(`${localhostEndPoint}/events`)
             .then(data => {
-                resolve(data);
+                resolve(normalizeEvents(data));
             })
             .catch(reject);
     });
