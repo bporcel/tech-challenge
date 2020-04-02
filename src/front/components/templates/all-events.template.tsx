@@ -9,14 +9,15 @@ import Modal from '../molecules/modal.molecule';
 import Filter from '../organisms/filter.organism';
 import NoContent from '../pages/no-content.page';
 
-const StyledTemplate = styled.div`
-    margin-top: 4em;
-`;
-
 const StyledError = styled.span`
     color: ${Theme.colors.red};
     font-size: ${Theme.font.size.body1};
 `;
+
+const StyledRenderEvents = styled.div`
+    width: 45%;
+    margin: auto;
+`
 
 interface Props {
     events: Events[];
@@ -55,7 +56,7 @@ const AllEventsTemplate: React.FC<Props> = ({
 
     const renderEvents = (): JSX.Element[] =>
         events.map((event: any, index: number) => (
-            <div key={index}>
+            <StyledRenderEvents key={index}>
                 <p className="pl-1">{event.startDate}</p>
                 <Card
                     events={event.events}
@@ -63,7 +64,7 @@ const AllEventsTemplate: React.FC<Props> = ({
                     handleClickButton={handleClickSignUp}
                     initialButtonText={literals.signUp}
                 />
-            </div>
+            </StyledRenderEvents>
         ));
 
     const modalLiterals = {
@@ -90,33 +91,37 @@ const AllEventsTemplate: React.FC<Props> = ({
     };
 
     return (
-        <StyledTemplate>
-            {allEvents.length > 0 ? (
-                <>
-                    <Filter
-                        literals={filterLiterals}
-                        {...{ allEvents }}
-                        {...{ cities }}
-                        {...{ handleFilterEvents }}
-                    />
-                    {events.length <= 0 && (
-                        <StyledError>{literals.noFilterEvents}</StyledError>
-                    )}
-                    {renderEvents()}
-                    {toogleModal && (
-                        <Modal
-                            event={currentModalEvent}
-                            {...{ handleClickToogleModal }}
-                            {...{ handleClickSignUp }}
-                            {...{ handleClickJoin }}
-                            literals={modalLiterals}
-                        />
-                    )}
-                </>
-            ) : (
-                <NoContent />
+        <>
+            <div className="w-100">
+                {allEvents.length > 0 ? (
+                    <>
+                        <div>
+                            <Filter
+                                literals={filterLiterals}
+                                {...{ allEvents }}
+                                {...{ cities }}
+                                {...{ handleFilterEvents }}
+                            />
+                        </div>
+                        {events.length <= 0 && (
+                            <StyledError>{literals.noFilterEvents}</StyledError>
+                        )}
+                        {renderEvents()}
+                    </>
+                ) : (
+                    <NoContent />
+                )}
+            </div>
+            {toogleModal && (
+                <Modal
+                    event={currentModalEvent}
+                    {...{ handleClickToogleModal }}
+                    {...{ handleClickSignUp }}
+                    {...{ handleClickJoin }}
+                    literals={modalLiterals}
+                />
             )}
-        </StyledTemplate>
+        </>
     );
 };
 

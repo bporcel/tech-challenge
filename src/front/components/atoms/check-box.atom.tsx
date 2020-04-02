@@ -9,6 +9,7 @@ const StyledLabel = styled.label`
     vertical-align: middle;
     background-color: ${Theme.colors.white};
     padding: 0.7em;
+    margin-top: 0.9em;
     &:hover {
         cursor: pointer;
     }

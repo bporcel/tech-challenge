@@ -32,7 +32,7 @@ const StyledHeader = styled.div`
 const Header: React.FC = () => {
     return (
         <>
-            <StyledHeader className="d-flex flex-row align-items-center justify-between pd-1">
+            <StyledHeader className="d-flex flex-row align-items-center justify-around pd-1">
                 <StyledImg src={logo} alt="trivago logo" className="ml-1" />
                 <nav>
                     <ul className="inline-list mr-0 pd-0">

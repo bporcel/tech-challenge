@@ -47,6 +47,10 @@ html{
         justify-content: space-between;
     }
     
+    &.justify-around {
+        justify-content: space-around;
+    }
+    
     &.align-items-end{
         align-items: flex-end;
     }
@@ -69,6 +73,10 @@ html{
 
 .mb-1 {
     margin-bottom: 1em;
+}
+
+.w-100 {
+    width: 100%;
 }
 
 .inline-list {

@@ -42,11 +42,7 @@ const Card: React.FC<Props> = ({
             </div>
         ));
 
-    return (
-        <div>
-            <StyledCard className="bordered">{renderRows()}</StyledCard>
-        </div>
-    );
+    return <StyledCard className="bordered">{renderRows()}</StyledCard>;
 };
 
 export default Card;

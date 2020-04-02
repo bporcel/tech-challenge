@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Theme from '../../styles/theme';
 import Header from '../atoms/header.atom';
 
 const StyledLayout = styled.div`
-    padding: 0 500px 30% 30%;
+    margin-bottom: 500px;
 `;
 
 interface Props {
