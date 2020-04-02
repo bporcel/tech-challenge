@@ -39,6 +39,10 @@ html{
         align-items: baseline;
     }
 
+    &.align-items-end{
+        align-items: flex-end;
+    }
+
     &.justify-center {
         justify-content: center;
     }
@@ -49,10 +53,6 @@ html{
     
     &.justify-around {
         justify-content: space-around;
-    }
-    
-    &.align-items-end{
-        align-items: flex-end;
     }
 }
 .pd-1 {

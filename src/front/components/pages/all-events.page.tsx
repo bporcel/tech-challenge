@@ -3,16 +3,19 @@ import {
     getCities,
     getEvents,
     groupEventsByDate,
+    normalizeEvents,
 } from '../../services/masterdata.service';
 import literals from '../../resources/i18n/en.json';
 import Events from '../../models/events.model';
+import EventsResponse from '../../models/http/events-response.model';
 import Cities from '../../models/cities.model';
 import AllEventsTemplate from '../templates/all-events.template';
 
 const AllEvents: React.FC = () => {
     const [filteredEvents, setFilteredEvents] = useState<Events[]>([]);
     const [cities, setCities] = useState<Cities[]>([]);
-    const events = useRef<Events[]>([]);
+    const events = useRef<EventsResponse[]>([]);
+    const normalizedEvents = useRef<Events[]>([]);
 
     useEffect(() => {
         getCities().then(setCities);
@@ -21,8 +24,13 @@ const AllEvents: React.FC = () => {
     useEffect(() => {
         if (cities.length > 0) {
             getEvents().then(eventsRes => {
-                events.current = mapEventsAndCities(eventsRes);
-                setFilteredEvents(mapEventsAndCities(eventsRes));
+                events.current = eventsRes;
+                normalizedEvents.current = mapEventsAndCities(
+                    normalizeEvents(eventsRes)
+                );
+                setFilteredEvents(
+                    mapEventsAndCities(normalizeEvents(eventsRes))
+                );
             });
         }
     }, [cities]);
@@ -75,7 +83,7 @@ const AllEvents: React.FC = () => {
             filterValues.isFree = '';
         }
 
-        events.current.forEach(eventGroup => {
+        normalizedEvents.current.forEach(eventGroup => {
             eventGroup.events.forEach(event => {
                 if (filterValues.from === '' || filterValues.to === '') {
                     if (findKeyInEvent(filterValues, event)) {
@@ -105,20 +113,9 @@ const AllEvents: React.FC = () => {
     };
 
     const handleClickJoin = ({ id }): boolean => {
-        let event;
+        const found = events.current.find(event => `${event.id}` === id);
 
-        filteredEvents.forEach(eventGroup => {
-            const found = eventGroup.events.find(event => `${event.id}` === id);
-
-            if (found) {
-                event = {
-                    startDate: eventGroup.startDate,
-                    events: [found],
-                };
-            }
-        });
-
-        sessionStorage.setItem(id, JSON.stringify(event));
+        sessionStorage.setItem(id, JSON.stringify(found));
         return true;
     };
 
@@ -141,7 +138,7 @@ const AllEvents: React.FC = () => {
 
     const props = {
         events: filteredEvents,
-        allEvents: events.current,
+        allEvents: normalizedEvents.current,
         cities,
         literals: templateLiterals,
         handleClickJoin,

@@ -9,15 +9,18 @@ import Modal from '../molecules/modal.molecule';
 import Filter from '../organisms/filter.organism';
 import NoContent from '../pages/no-content.page';
 
-const StyledError = styled.span`
+const StyledError = styled.div`
     color: ${Theme.colors.red};
     font-size: ${Theme.font.size.body1};
+    width: 45%;
+    margin: 1em auto;
+    padding-left: 1em;
 `;
 
 const StyledRenderEvents = styled.div`
     width: 45%;
     margin: auto;
-`
+`;
 
 interface Props {
     events: Events[];
@@ -95,14 +98,12 @@ const AllEventsTemplate: React.FC<Props> = ({
             <div className="w-100">
                 {allEvents.length > 0 ? (
                     <>
-                        <div>
-                            <Filter
-                                literals={filterLiterals}
-                                {...{ allEvents }}
-                                {...{ cities }}
-                                {...{ handleFilterEvents }}
-                            />
-                        </div>
+                        <Filter
+                            literals={filterLiterals}
+                            {...{ allEvents }}
+                            {...{ cities }}
+                            {...{ handleFilterEvents }}
+                        />
                         {events.length <= 0 && (
                             <StyledError>{literals.noFilterEvents}</StyledError>
                         )}

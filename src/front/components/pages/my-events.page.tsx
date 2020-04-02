@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { normalizeEvents } from '../../services/masterdata.service';
+import EventsResponse from '../../models/http/events-response.model';
 import literals from '../../resources/i18n/en.json';
 import Events, { Event } from '../../models/events.model';
 import MyEventsTemplate from '../templates/my-events.template';
@@ -7,25 +9,17 @@ const MyEvents: React.FC = () => {
     const [events, setEvents] = useState<Events[]>([]);
 
     const getMyEvents = (): void => {
-        const eventsAux: Events[] = [];
+        const eventsAux: EventsResponse[] = [];
         for (let i in sessionStorage) {
             const item = sessionStorage.getItem(i);
 
             if (item) {
                 const parsedItem = JSON.parse(item);
-                const found = eventsAux.find(
-                    eventGroup => eventGroup.startDate === parsedItem.startDate
-                );
-
-                if (found) {
-                    found.events.push(parsedItem.events[0]);
-                } else {
-                    eventsAux.push(parsedItem);
-                }
+                eventsAux.push(parsedItem);
             }
         }
 
-        setEvents(eventsAux);
+        setEvents(normalizeEvents(eventsAux));
     };
 
     useEffect(() => {

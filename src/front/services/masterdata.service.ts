@@ -47,7 +47,7 @@ export const groupEventsByDate = (auxEvents): Events[] => {
     return events;
 };
 
-const normalizeEvents = (data: EventsResponse[]): Events[] => {
+export const normalizeEvents = (data: EventsResponse[]): Events[] => {
     const auxEvents: EventsResponse[] = [];
 
     data.sort((a, b) => +new Date(a.startDate) - +new Date(b.startDate));
@@ -80,11 +80,11 @@ export const getCities = (): Promise<Cities[]> =>
             .catch(reject);
     });
 
-export const getEvents = (): Promise<Events[]> =>
-    new Promise<Events[]>((resolve, reject) => {
+export const getEvents = (): Promise<EventsResponse[]> =>
+    new Promise<EventsResponse[]>((resolve, reject) => {
         get<EventsResponse[]>(`${localhostEndPoint}/events`)
             .then(data => {
-                resolve(normalizeEvents(data));
+                resolve(data);
             })
             .catch(reject);
     });

@@ -9,15 +9,15 @@ const StyledDiv = styled.div`
             css`
                 font-size: ${Theme.font.size.body2};
                 color: ${Theme.colors.darkGray};
-            `) ||
-        (props.free &&
-            css`
-                color: ${Theme.colors.green};
-                font-weight: bold;
+                padding-left: 1.2em;
             `) ||
         (props.time &&
             css`
                 font-size: ${Theme.font.size.bodyBig};
+            `) ||
+        (props.titl &&
+            css`
+                padding: 1.73em 0 1em 1em;
             `)}
 `;
 
@@ -25,34 +25,18 @@ interface Props {
     from: string;
     duration: string;
     title: string;
-    isFree: boolean;
     location: string | number;
-    literals: Literals;
 }
 
-const Event: React.FC<Props> = ({
-    from,
-    duration,
-    title,
-    isFree,
-    location,
-    literals,
-}) => {
+const Event: React.FC<Props> = ({ from, duration, title, location }) => {
     return (
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row align-items-center">
             <StyledDiv time className="pd-1">
                 {from}
             </StyledDiv>
             <div className="d-flex flex-column">
-                <div className="d-flex flex-row">
-                    <div className="pd-1">{title}</div>
-                    <StyledDiv free className="pd-1">
-                        {isFree ? `${literals.free}` : ''}
-                    </StyledDiv>
-                </div>
-                <StyledDiv location className="pl-1">
-                    {`${location} - ${duration}`}
-                </StyledDiv>
+                <StyledDiv titl>{title}</StyledDiv>
+                <StyledDiv location>{`${location} - ${duration}`}</StyledDiv>
             </div>
         </div>
     );

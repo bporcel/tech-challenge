@@ -43,15 +43,6 @@ const StyledModal = styled.div`
     }
 `;
 
-const StyledSpan = styled.span`
-    padding: 1em;
-    background-color: ${Theme.colors.lightBlue};
-`;
-
-const StyledParagraph = styled.p`
-    margin: 2em 0;
-`;
-
 interface Props {
     event: Event;
     literals: Literals;
@@ -100,10 +91,7 @@ const Modal: React.FC<Props> = ({
                     />
                 </div>
                 <div className="modal-body pd-1">
-                    <p>{formatModalTextName()}</p>
-                    <StyledParagraph>
-                        <StyledSpan>{event.name}</StyledSpan>
-                    </StyledParagraph>
+                    <p>{formatModalTextName()}<span className="bold">{event.name}</span></p>
                     <p>{formatModalTextDateAndLocation()}</p>
                     <p>Are you sure?</p>
                 </div>

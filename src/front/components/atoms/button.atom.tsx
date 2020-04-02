@@ -64,7 +64,7 @@ const StyledButton = styled.button`
 `;
 
 interface Props {
-    type: 'primary' | 'secondary' | 'close' | 'warning';
+    type: 'primary' | 'secondary' | 'close' | 'warning' | string;
     initialText: string;
     id?: string;
     isHovereable?: boolean;
