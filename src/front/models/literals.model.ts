@@ -11,6 +11,7 @@ export default interface Literals {
     x?: string;
     myEventsEmpty?: string;
     availableEvents?: string;
+    seeAllAvailableEvents?: string;
     noEvents?: string;
     eventName?: string;
     city?: string;

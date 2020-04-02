@@ -15,6 +15,12 @@ const StyledButton = styled.button`
         outline: none;
     }
 
+    ${({ large }) =>
+        large &&
+        css`
+            font-size: 18px;
+        `}
+
     ${({ type }) =>
         (type === 'primary' &&
             css`
@@ -45,23 +51,24 @@ const StyledButton = styled.button`
                 padding: 0;
                 min-width: 1em;
             `) ||
-        (type === 'cancel' &&
+        (type === 'warning' &&
             css`
-                color: ${Theme.colors.red};
-                border-color: ${Theme.colors.red};
+                color: ${Theme.colors.orange};
+                border-color: ${Theme.colors.orange};
                 &:hover {
                     color: ${Theme.colors.white};
-                    background-color: ${Theme.colors.red};
+                    background-color: ${Theme.colors.orange};
                     cursor: pointer;
                 }
             `)}
 `;
 
 interface Props {
-    type: 'primary' | 'secondary' | 'close' | 'cancel';
+    type: 'primary' | 'secondary' | 'close' | 'warning';
     initialText: string;
     id?: string;
     isHovereable?: boolean;
+    large?: boolean;
     literals?: Literals;
     handleClick: Function;
 }
@@ -70,6 +77,7 @@ const Button: React.FC<Props> = ({
     type,
     handleClick,
     id,
+    large,
     literals,
     isHovereable,
     initialText,
@@ -94,6 +102,7 @@ const Button: React.FC<Props> = ({
         <StyledButton
             {...{ id }}
             {...{ type }}
+            {...{ large }}
             onClick={handleClickMiddleman}
             onMouseOver={handleHover}
             onMouseOut={handleHover}

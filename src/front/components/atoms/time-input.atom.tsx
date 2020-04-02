@@ -1,4 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
+import Theme from '../../styles/theme';
+
+const StyledInput = styled.input`
+    padding: 0.5em;
+    margin-top: 1em;
+    &:hover {
+        cursor: text;
+    }
+    &:focus {
+        outline: ${Theme.colors.blue};
+    }
+
+    &:before {
+        content: ${({ label }) => `'${label}'`};
+        margin-right: 0.6em;
+        color: #9d9d9d;
+    }
+`;
 
 interface Props {
     id: string;
@@ -13,15 +32,13 @@ const TimeInput: React.FC<Props> = ({ id, label, value, handleChange }) => {
     };
 
     return (
-        <div className="input-form">
-            <label htmlFor={id}>{label}</label>
-            <input
-                {...{ id }}
-                {...{ value }}
-                type="time"
-                onChange={handleChangeMiddleman}
-            />
-        </div>
+        <StyledInput
+            {...{ label }}
+            {...{ id }}
+            {...{ value }}
+            type="time"
+            onChange={handleChangeMiddleman}
+        />
     );
 };
 

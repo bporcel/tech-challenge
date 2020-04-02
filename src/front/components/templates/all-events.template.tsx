@@ -11,7 +11,7 @@ import NoContent from '../pages/no-content.page';
 
 const StyledError = styled.span`
     color: ${Theme.colors.red};
-    font-size: ${Theme.font.size.body2};
+    font-size: ${Theme.font.size.body1};
 `;
 
 interface Props {
@@ -87,8 +87,11 @@ const AllEventsTemplate: React.FC<Props> = ({
         <div>
             {allEvents.length > 0 ? (
                 <>
-                    <div className={`${toogleModal ? 'modal-blur' : ''}`}>
-                        <h1 className="title">{literals.availableEvents}</h1>
+                    <div className={`${toogleModal && 'modal-blur'}`}>
+                        {/* <h1 className="title">{literals.availableEvents}</h1> */}
+                        <br />
+                        <br />
+                        <br />
                         <Filter
                             literals={filterLiterals}
                             {...{ allEvents }}

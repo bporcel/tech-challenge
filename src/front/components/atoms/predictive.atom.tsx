@@ -1,5 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
+import Theme from '../../styles/theme';
 import IdName from '../../models/id-name.model';
+
+const StyledInput = styled.input`
+    padding: 0.5em;
+    height: 1.5em;
+    margin-top: 1em;
+    &:focus {
+        outline: ${Theme.colors.blue};
+    }
+`;
 
 interface Props {
     id: string;
@@ -38,16 +49,16 @@ const Select: React.FC<Props> = ({
     };
 
     return (
-        <div className="input-form">
-            <label htmlFor={inputId}>{label}</label>
-            <input
+        <>
+            <StyledInput
+                placeholder={label}
                 id={inputId}
-                {...{ value }}
+                value={value || ''}
                 list={id}
                 onChange={handleChangeMiddleman}
             />
             <datalist {...{ id }}>{renderOptions()}</datalist>
-        </div>
+        </>
     );
 };
 

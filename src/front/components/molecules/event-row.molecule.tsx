@@ -40,7 +40,7 @@ const EventRow: React.FC<Props> = ({
             />
             <Button
                 id={`${event.id}`}
-                type="secondary"
+                type="primary"
                 handleClick={() => handleClickButton(event)}
                 literals={buttonLiterals}
                 isHovereable={isButtonHovereable}

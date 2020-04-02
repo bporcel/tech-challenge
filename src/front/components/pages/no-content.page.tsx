@@ -1,19 +1,36 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import literals from '../../resources/i18n/en.json';
 import NoContentTemplate from '../templates/no-content.template';
 
 const NoContent: React.FC = () => {
     const location = useLocation();
-    let text;
+    let templateLiterals;
+    let button;
+    const history = useHistory();
 
     if (location.pathname === '/') {
-        text = literals.noEvents;
+        templateLiterals = { noEvents: literals.noEvents };
+        button = false;
     } else if (location.pathname === '/my-events') {
-        text = literals.myEventsEmpty;
+        templateLiterals = {
+            myEventsEmpty: literals.myEventsEmpty,
+            seeAllAvailableEvents: literals.seeAllAvailableEvents,
+        };
+        button = true;
     }
 
-    return <NoContentTemplate {...{ text }} />;
+    const handleClickGoToAllEvents = () => {
+        history.push('/');
+    };
+
+    return (
+        <NoContentTemplate
+            literals={templateLiterals}
+            {...{ button }}
+            {...{ handleClickGoToAllEvents }}
+        />
+    );
 };
 
 export default NoContent;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, cloneElement } from 'react';
 import {
     getCities,
     getEvents,
@@ -62,7 +62,7 @@ const AllEvents: React.FC = () => {
     const checkTime = (filterValues, event) => {
         let found = true;
 
-        if (event.time < filterValues.from || event.time > filterValues.to) {
+        if (event.from < filterValues.from || event.from > filterValues.to) {
             found = false;
         }
 
@@ -77,7 +77,7 @@ const AllEvents: React.FC = () => {
 
         events.current.forEach(eventGroup => {
             eventGroup.events.forEach(event => {
-                if (filterValues.from === '' && filterValues.to === '') {
+                if (filterValues.from === '' || filterValues.to === '') {
                     if (findKeyInEvent(filterValues, event)) {
                         const auxEvent = {
                             startDate: eventGroup.startDate,
@@ -90,6 +90,7 @@ const AllEvents: React.FC = () => {
                         findKeyInEvent(filterValues, event) &&
                         checkTime(filterValues, event)
                     ) {
+                        console.log('object');
                         const auxEvent = {
                             startDate: eventGroup.startDate,
                             ...event,

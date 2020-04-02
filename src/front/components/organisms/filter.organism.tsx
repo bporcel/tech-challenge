@@ -52,38 +52,43 @@ const Filter: React.FC<Props> = ({
     const timeRangeLiterals = {
         from: literals.from,
         to: literals.to,
+        morning: 'Morning',
+        afternoon: 'Afternoon',
+        night: 'Night',
     };
 
     return (
-        <div className="d-flex flex-row align-items-center justify-between">
-            <div className="d-flex flex-row">
-                <Predictive
-                    id="events"
-                    inputId="name"
-                    value={filterState['name']}
-                    label={literals.eventName}
-                    options={normalizeEvents()}
-                    handleChange={setFilterState}
-                />
-                <div className="pl-1">
+        <div className="d-flex flex-column align-items-end">
+            <div className="d-flex flex-row align-items-end justify-between mb-1">
+                <div className="d-flex flex-row">
                     <Predictive
-                        id="cities"
-                        inputId="city"
-                        value={filterState['city']}
-                        label={literals.city}
-                        options={cities}
+                        id="events"
+                        inputId="name"
+                        value={filterState['name']}
+                        label={literals.eventName}
+                        options={normalizeEvents()}
                         handleChange={setFilterState}
                     />
-                </div>
-                <div className="d-flex flex-row pl-1">
-                    <TimeRange
-                        values={{
-                            from: filterState['from'],
-                            to: filterState['to'],
-                        }}
-                        literals={timeRangeLiterals}
-                        handleChange={setFilterState}
-                    />
+                    <div className="pl-1">
+                        <Predictive
+                            id="cities"
+                            inputId="city"
+                            value={filterState['city']}
+                            label={literals.city}
+                            options={cities}
+                            handleChange={setFilterState}
+                        />
+                    </div>
+                    <div className="d-flex flex-row pl-1">
+                        <TimeRange
+                            values={{
+                                from: filterState['from'],
+                                to: filterState['to'],
+                            }}
+                            literals={timeRangeLiterals}
+                            handleChange={setFilterState}
+                        />
+                    </div>
                 </div>
                 <div className="pl-1">
                     <CheckBox
@@ -94,15 +99,12 @@ const Filter: React.FC<Props> = ({
                     />
                 </div>
             </div>
-
-            <div className="pl-1 d-flex flex-column">
-                <Button
-                    id="reset"
-                    type="primary"
-                    initialText={literals.reset}
-                    handleClick={setFilterState}
-                />
-            </div>
+            <Button
+                id="reset"
+                type="warning"
+                initialText={literals.reset}
+                handleClick={setFilterState}
+            />
         </div>
     );
 };

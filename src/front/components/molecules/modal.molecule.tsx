@@ -6,8 +6,7 @@ import { Event } from '../../models/events.model';
 import Literals from '../../models/literals.model';
 
 const StyledModal = styled.div`
-    border: solid 1px;
-
+    font-size: 16px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -16,6 +15,9 @@ const StyledModal = styled.div`
     background-color: ${Theme.colors.white};
     width: 40%;
     height: 40%;
+    -webkit-box-shadow: 3px 3px 13px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 3px 13px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 3px 13px -1px rgba(0, 0, 0, 0.75);
     & .modal-header {
         background-color: ${Theme.colors.lightGray};
     }
@@ -72,14 +74,14 @@ const Modal: React.FC<Props> = ({
             </div>
             <div className="d-flex flex-row modal-footer">
                 <Button
-                    type="cancel"
+                    type="primary"
                     initialText={literals.cancel}
                     handleClick={handleClickToogleModal}
                 />
                 <div className="pl-1">
                     <Button
                         id={`${event.id}`}
-                        type="primary"
+                        type="secondary"
                         initialText={literals.join}
                         handleClick={(id: string): void => {
                             handleClickJoin(id);

@@ -38,7 +38,6 @@ const Event: React.FC<Props> = ({
     location,
     literals,
 }) => {
-
     return (
         <div className="d-flex flex-row">
             <StyledDiv time className="pd-1">
@@ -52,7 +51,7 @@ const Event: React.FC<Props> = ({
                     </StyledDiv>
                 </div>
                 <StyledDiv location className="pl-1">
-                    {`${location} - ${duration}h`}
+                    {`${location} - ${duration}`}
                 </StyledDiv>
             </div>
         </div>

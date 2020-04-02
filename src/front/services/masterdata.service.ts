@@ -59,7 +59,9 @@ const normalizeEvents = (data: EventsResponse[]): Events[] => {
         const normalizedEvent: Event = {
             ...event,
             from: from.format('HH:mm'),
-            duration: `${duration.hours()}:${duration.minutes()}`,
+            duration: `${duration.hours()}${
+                duration.minutes() !== 0 ? `:${duration.minutes()}h` : 'h'
+            }`,
         };
 
         auxEvents.push({

@@ -1,4 +1,4 @@
-export default interface IdName{
+export default interface IdName {
     id: string | number;
     name: string;
 }

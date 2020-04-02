@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import Theme from './theme';
 // @ts-ignore
-import CourierStd from '../../fonts/CourierStd.otf'
+import CourierStd from '../../fonts/CourierStd.otf';
 
 const GlobalStyles = createGlobalStyle`
 body {
@@ -42,6 +42,10 @@ html{
     &.justify-between {
         justify-content: space-between;
     }
+    
+    &.align-items-end{
+        align-items: flex-end;
+    }
 }
 .pd-1 {
     padding: 1em;
@@ -49,6 +53,18 @@ html{
 
 .pl-1 {
     padding-left: 1em;
+}
+
+.mr-0 {
+    margin: 0;
+}
+
+.pd-0 {
+    padding: 0;
+}
+
+.mb-1 {
+    margin-bottom: 1em;
 }
 
 .inline-list {
@@ -64,28 +80,17 @@ html{
     margin: 0;
 }
 
-.mr-0 {
-    margin: 0;
-}
-
-.pd-0 {
-    padding: 0;
-}
-
 .bordered {
     border: solid 1px ${Theme.colors.gray};
+}
+
+.rounded {
+    border-radius: 1em;
 }
 
 .title {
     font-family: ${Theme.font.family.courier};
     font-weight: 100;
-}
-
-.input-form {
-    &label,
-    input {
-        display: block;
-    }
 }
 
 .modal-blur {

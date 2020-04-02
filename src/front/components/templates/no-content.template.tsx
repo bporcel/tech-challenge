@@ -1,34 +1,47 @@
 import React from 'react';
 import styled from 'styled-components';
 import Theme from '../../styles/theme';
-import { NavLink } from 'react-router-dom';
+import Button from '../atoms/button.atom';
 import Literals from '../../models/literals.model';
 
 const StyledNoContent = styled.div`
-    background-color: ${Theme.colors.white};
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+`;
 
-    & a {
-        text-decoration: none;
-        color: ${Theme.colors.orange};
-    }
-
-    & a:hover {
-        color: ${Theme.colors.blue};
-    }
+const StyledTextBox = styled.div`
+    background-color: ${Theme.colors.white};
+    margin-bottom: 50px;
 `;
 
 interface Props {
-    text: string;
+    button: boolean;
+    literals: Literals;
+    handleClickGoToAllEvents: Function;
 }
 
-const NoContentTemplate: React.FC<Props> = ({ text }) => {
+const NoContentTemplate: React.FC<Props> = ({
+    literals,
+    button,
+    handleClickGoToAllEvents,
+}) => {
     return (
-        <StyledNoContent className="bordered pd-1">
-            <h1 className="title">{text}</h1>
+        <StyledNoContent className="d-flex flex-column">
+            <StyledTextBox className="bordered pd-1">
+                <h1 className="title">
+                    {button ? literals.myEventsEmpty : literals.noEvents}
+                </h1>
+            </StyledTextBox>
+            {button && (
+                <Button
+                    large
+                    type="primary"
+                    initialText={literals.seeAllAvailableEvents}
+                    handleClick={handleClickGoToAllEvents}
+                />
+            )}
         </StyledNoContent>
     );
 };

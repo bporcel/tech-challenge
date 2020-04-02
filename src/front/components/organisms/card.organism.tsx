@@ -7,7 +7,7 @@ import Literals from '../../models/literals.model';
 
 const StyledCard = styled.div`
     background-color: ${Theme.colors.white};
-    min-width: 60em;
+    // width: 40em;
 `;
 
 interface Props {
