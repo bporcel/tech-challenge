@@ -7,7 +7,6 @@ import Literals from '../../models/literals.model';
 
 const StyledCard = styled.div`
     background-color: ${Theme.colors.white};
-    // width: 40em;
 `;
 
 interface Props {
@@ -33,8 +32,8 @@ const Card: React.FC<Props> = ({
         events.map((event: Event, index: number) => (
             <div key={index}>
                 <EventRow
-                    {...{ event }}
                     literals={EventRowLiterals}
+                    {...{ event }}
                     {...{ isButtonHovereable }}
                     {...{ initialButtonText }}
                     {...{ handleClickButton }}

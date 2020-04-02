@@ -5,19 +5,28 @@ import Button from '../atoms/button.atom';
 import { Event } from '../../models/events.model';
 import Literals from '../../models/literals.model';
 
-const StyledModal = styled.div`
-    font-size: 16px;
+const StyledBackground = styled.div`
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const StyledModal = styled.div`
+    font-size: 16px;
     background-color: ${Theme.colors.white};
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 40%;
     height: 40%;
-    -webkit-box-shadow: 3px 3px 13px -1px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 3px 3px 13px -1px rgba(0, 0, 0, 0.75);
-    box-shadow: 3px 3px 13px -1px rgba(0, 0, 0, 0.75);
+
     & .modal-header {
         background-color: ${Theme.colors.lightGray};
     }
@@ -32,6 +41,15 @@ const StyledModal = styled.div`
         bottom: 1em;
         right: 1em;
     }
+`;
+
+const StyledSpan = styled.span`
+    padding: 1em;
+    background-color: ${Theme.colors.lightBlue};
+`;
+
+const StyledParagraph = styled.p`
+    margin: 2em 0;
 `;
 
 interface Props {
@@ -53,44 +71,62 @@ const Modal: React.FC<Props> = ({
         }
     };
 
-    const formatModalText = (): string => {
+    document.onclick = ({ target }: any) => {
+        const { id } = target;
+        if (id === 'background') {
+            handleClickToogleModal();
+        }
+    };
+
+    const formatModalTextName = (): string => {
         const literalList = literals.modalSignUp.split('$');
-        return `${literalList[0]}${event.name}${literalList[1]}${event.date}${literalList[2]}${event.city}`;
+        return `${literalList[0]}: `;
+    };
+
+    const formatModalTextDateAndLocation = (): string => {
+        const literalList = literals.modalSignUp.split('$');
+        return `${literalList[1]}${event.date}${literalList[2]}${event.city}${literalList[3]}${event.from}${literalList[4]}`;
     };
 
     return (
-        <StyledModal>
-            <div className="d-flex flex-row justify-between align-center modal-header pd-1">
-                <h2 className="title">Header del Modal</h2>
-                <Button
-                    type="close"
-                    initialText={literals.x}
-                    handleClick={handleClickToogleModal}
-                />
-            </div>
-            <div className="modal-body pd-1">
-                <p>{formatModalText()}</p>
-                <p>Are you sure?</p>
-            </div>
-            <div className="d-flex flex-row modal-footer">
-                <Button
-                    type="primary"
-                    initialText={literals.cancel}
-                    handleClick={handleClickToogleModal}
-                />
-                <div className="pl-1">
+        <StyledBackground id="background">
+            <StyledModal>
+                <div className="d-flex flex-row justify-between align-items-baseline modal-header pd-1">
+                    <h2 className="title mr-0">{literals.joinTheEvent}</h2>
                     <Button
-                        id={`${event.id}`}
-                        type="secondary"
-                        initialText={literals.join}
-                        handleClick={(id: string): void => {
-                            handleClickJoin(id);
-                            handleClickToogleModal();
-                        }}
+                        type="close"
+                        initialText={literals.x}
+                        handleClick={handleClickToogleModal}
                     />
                 </div>
-            </div>
-        </StyledModal>
+                <div className="modal-body pd-1">
+                    <p>{formatModalTextName()}</p>
+                    <StyledParagraph>
+                        <StyledSpan>{event.name}</StyledSpan>
+                    </StyledParagraph>
+                    <p>{formatModalTextDateAndLocation()}</p>
+                    <p>Are you sure?</p>
+                </div>
+                <div className="d-flex flex-row modal-footer">
+                    <Button
+                        type="primary"
+                        initialText={literals.cancel}
+                        handleClick={handleClickToogleModal}
+                    />
+                    <div className="pl-1">
+                        <Button
+                            id={`${event.id}`}
+                            type="secondary"
+                            initialText={literals.join}
+                            handleClick={(id: string): void => {
+                                handleClickToogleModal();
+                                handleClickJoin(id);
+                            }}
+                        />
+                    </div>
+                </div>
+            </StyledModal>
+        </StyledBackground>
     );
 };
 

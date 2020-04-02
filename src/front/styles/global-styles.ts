@@ -34,6 +34,10 @@ html{
     &.align-items-center {
         align-items: center;
     }
+    
+    &.align-items-baseline {
+        align-items: baseline;
+    }
 
     &.justify-center {
         justify-content: center;
@@ -91,14 +95,6 @@ html{
 .title {
     font-family: ${Theme.font.family.courier};
     font-weight: 100;
-}
-
-.modal-blur {
-    -webkit-filter: blur(1px);
-    -moz-filter: blur(1px);
-    -o-filter: blur(1px);
-    -ms-filter: blur(1px);
-    filter: blur(1px);
 }
 
 .bold {

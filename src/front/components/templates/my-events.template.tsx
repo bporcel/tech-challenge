@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
 import Card from '../organisms/card.organism';
 import Events from '../../models/events.model';
 import Literals from '../../models/literals.model';
@@ -29,8 +28,8 @@ const MyEventsTemplate: React.FC<Props> = ({
                 <Card
                     events={event.events}
                     literals={cardLiterals}
-                    isButtonHovereable
                     initialButtonText={literals.youreIn}
+                    isButtonHovereable
                     handleClickButton={handleClickCancelEvent}
                 />
             </div>

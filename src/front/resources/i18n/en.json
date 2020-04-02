@@ -1,6 +1,5 @@
 {
     "allEvents": "All events",
-    "availableEvents": "These are our available events",
     "cancel": "Cancel",
     "city": "City",
     "eventName": "Event name",
@@ -8,7 +7,8 @@
     "from": "Start time",
     "seeAllAvailableEvents": "See all available events",
     "join": "Join",
-    "modalSignUp": "You are about to sign up for $. This event takes place $ in $.",
+    "joinTheEvent": "Join the event",
+    "modalSignUp": "You are about to sign up for $This event takes place $ in $ at $.",
     "myEvents": "My events",
     "myEventsEmpty": "You are not subscribed to any events yet.",
     "myNextEvents": "My next tech events",

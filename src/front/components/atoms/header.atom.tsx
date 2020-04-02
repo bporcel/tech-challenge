@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Theme from '../../styles/theme';
 import literals from '../../resources/i18n/en.json';
 // @ts-ignore
-import logo from '../../resources/images/logo.png';
+import logo from '../../resources/images/newlogo.png';
 
 const StyledLi = styled.li`
     & a {
@@ -32,9 +32,9 @@ const StyledHeader = styled.div`
 const Header: React.FC = () => {
     return (
         <>
-            <StyledHeader className="d-flex flex-row align-items-center pd-1">
+            <StyledHeader className="d-flex flex-row align-items-center justify-between pd-1">
                 <StyledImg src={logo} alt="trivago logo" className="ml-1" />
-                <nav className="menu">
+                <nav>
                     <ul className="inline-list mr-0 pd-0">
                         <StyledLi className="pl-1">
                             <NavLink exact to="/" activeClassName="active">

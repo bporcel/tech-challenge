@@ -47,9 +47,9 @@ const StyledButton = styled.button`
                 color: ${Theme.colors.gray};
                 border: none;
                 background-color: ${Theme.colors.lightGray};
-                font-size: 2em;
-                padding: 0;
-                min-width: 1em;
+                font-size: 1.5em;
+                padding: 0.3em 0.5em 0 0;
+                min-width: auto;
             `) ||
         (type === 'warning' &&
             css`
@@ -83,9 +83,14 @@ const Button: React.FC<Props> = ({
     initialText,
 }) => {
     const [text, setText] = useState(initialText);
-
+    const [disabled, setDisabled] = useState(false);
+    
     const handleClickMiddleman = ({ target }) => {
-        handleClick(target);
+        const shouldTextChange = handleClick(target);
+        if (shouldTextChange) {
+            setText(literals.youreIn);
+            setDisabled(shouldTextChange);
+        }
     };
 
     const handleHover = (): void => {
@@ -103,6 +108,7 @@ const Button: React.FC<Props> = ({
             {...{ id }}
             {...{ type }}
             {...{ large }}
+            {...{ disabled }}
             onClick={handleClickMiddleman}
             onMouseOver={handleHover}
             onMouseOut={handleHover}

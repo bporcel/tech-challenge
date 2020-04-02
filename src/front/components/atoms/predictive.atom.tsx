@@ -8,7 +8,13 @@ const StyledInput = styled.input`
     height: 1.5em;
     margin-top: 1em;
     &:focus {
-        outline: ${Theme.colors.blue};
+        outline-color: ${Theme.colors.blue};
+    }
+    &::placeholder,
+    ::-webkit-input-placeholder {
+        font-size: ${Theme.font.size.body1};
+        letter-spacing: 1px;
+        color: ${Theme.colors.gray};
     }
 `;
 

@@ -7,10 +7,10 @@ export default interface Literals {
     youreIn?: string;
     cancel?: string;
     join?: string;
+    joinTheEvent?: string;
     modalSignUp?: string;
     x?: string;
     myEventsEmpty?: string;
-    availableEvents?: string;
     seeAllAvailableEvents?: string;
     noEvents?: string;
     eventName?: string;

@@ -5,17 +5,19 @@ import Theme from '../../styles/theme';
 const StyledInput = styled.input`
     padding: 0.5em;
     margin-top: 1em;
+
     &:hover {
         cursor: text;
     }
+
     &:focus {
-        outline: ${Theme.colors.blue};
+        outline-color: ${Theme.colors.blue};
     }
 
     &:before {
         content: ${({ label }) => `'${label}'`};
-        margin-right: 0.6em;
-        color: #9d9d9d;
+        margin-right: 0.5em;
+        color: ${Theme.colors.gray};
     }
 `;
 

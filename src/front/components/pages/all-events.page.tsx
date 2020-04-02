@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, cloneElement } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     getCities,
     getEvents,
@@ -104,7 +104,7 @@ const AllEvents: React.FC = () => {
         setFilteredEvents(groupEventsByDate(filteredEvents));
     };
 
-    const handleClickJoin = ({ id }): void => {
+    const handleClickJoin = ({ id }): boolean => {
         let event;
 
         filteredEvents.forEach(eventGroup => {
@@ -119,6 +119,7 @@ const AllEvents: React.FC = () => {
         });
 
         sessionStorage.setItem(id, JSON.stringify(event));
+        return true;
     };
 
     const templateLiterals = {
@@ -126,15 +127,16 @@ const AllEvents: React.FC = () => {
         signUp: literals.signUp,
         cancel: literals.cancel,
         join: literals.join,
+        joinTheEvent: literals.joinTheEvent,
         modalSignUp: literals.modalSignUp,
         x: literals.x,
-        availableEvents: literals.availableEvents,
         noFilterEvents: literals.noFilterEvents,
         reset: literals.reset,
         eventName: literals.eventName,
         city: literals.city,
         from: literals.from,
         to: literals.to,
+        youreIn: literals.youreIn,
     };
 
     const props = {

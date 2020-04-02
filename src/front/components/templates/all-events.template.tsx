@@ -9,6 +9,10 @@ import Modal from '../molecules/modal.molecule';
 import Filter from '../organisms/filter.organism';
 import NoContent from '../pages/no-content.page';
 
+const StyledTemplate = styled.div`
+    margin-top: 4em;
+`;
+
 const StyledError = styled.span`
     color: ${Theme.colors.red};
     font-size: ${Theme.font.size.body1};
@@ -42,7 +46,7 @@ const AllEventsTemplate: React.FC<Props> = ({
             ...event,
             date: found.startDate,
         });
-        setToogleModal(!toogleModal);
+        handleClickToogleModal();
     };
 
     const handleClickToogleModal = (): void => {
@@ -54,10 +58,10 @@ const AllEventsTemplate: React.FC<Props> = ({
             <div key={index}>
                 <p className="pl-1">{event.startDate}</p>
                 <Card
-                    initialButtonText={literals.signUp}
                     events={event.events}
                     literals={cardLiterals}
                     handleClickButton={handleClickSignUp}
+                    initialButtonText={literals.signUp}
                 />
             </div>
         ));
@@ -66,11 +70,13 @@ const AllEventsTemplate: React.FC<Props> = ({
         modalSignUp: literals.modalSignUp,
         cancel: literals.cancel,
         join: literals.join,
+        joinTheEvent: literals.joinTheEvent,
         x: literals.x,
     };
 
     const cardLiterals = {
         signUp: literals.signUp,
+        youreIn: literals.youreIn,
         free: literals.free,
     };
 
@@ -84,25 +90,19 @@ const AllEventsTemplate: React.FC<Props> = ({
     };
 
     return (
-        <div>
+        <StyledTemplate>
             {allEvents.length > 0 ? (
                 <>
-                    <div className={`${toogleModal && 'modal-blur'}`}>
-                        {/* <h1 className="title">{literals.availableEvents}</h1> */}
-                        <br />
-                        <br />
-                        <br />
-                        <Filter
-                            literals={filterLiterals}
-                            {...{ allEvents }}
-                            {...{ cities }}
-                            {...{ handleFilterEvents }}
-                        />
-                        {events.length <= 0 && (
-                            <StyledError>{literals.noFilterEvents}</StyledError>
-                        )}
-                        {renderEvents()}
-                    </div>
+                    <Filter
+                        literals={filterLiterals}
+                        {...{ allEvents }}
+                        {...{ cities }}
+                        {...{ handleFilterEvents }}
+                    />
+                    {events.length <= 0 && (
+                        <StyledError>{literals.noFilterEvents}</StyledError>
+                    )}
+                    {renderEvents()}
                     {toogleModal && (
                         <Modal
                             event={currentModalEvent}
@@ -116,7 +116,7 @@ const AllEventsTemplate: React.FC<Props> = ({
             ) : (
                 <NoContent />
             )}
-        </div>
+        </StyledTemplate>
     );
 };
 
