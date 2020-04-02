@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Theme from '../../styles/theme';
-import Literals from '../../models/literals.model';
 
 const StyledDiv = styled.div`
     ${props =>

@@ -14,6 +14,7 @@ import AllEventsTemplate from '../templates/all-events.template';
 const AllEvents: React.FC = () => {
     const [filteredEvents, setFilteredEvents] = useState<Events[]>([]);
     const [cities, setCities] = useState<Cities[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>();
     const events = useRef<EventsResponse[]>([]);
     const normalizedEvents = useRef<Events[]>([]);
 
@@ -107,6 +108,7 @@ const AllEvents: React.FC = () => {
             });
         });
 
+        setCurrentPage(1);
         setFilteredEvents(groupEventsByDate(filteredEvents));
     };
 
@@ -137,7 +139,9 @@ const AllEvents: React.FC = () => {
         events: filteredEvents,
         allEvents: normalizedEvents.current,
         cities,
+        currentPage,
         literals: templateLiterals,
+        setCurrentPage,
         handleClickJoin,
         handleFilterEvents,
     };

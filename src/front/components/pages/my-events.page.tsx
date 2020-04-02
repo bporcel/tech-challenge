@@ -7,6 +7,7 @@ import MyEventsTemplate from '../templates/my-events.template';
 
 const MyEvents: React.FC = () => {
     const [events, setEvents] = useState<Events[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
     const getMyEvents = (): void => {
         const eventsAux: EventsResponse[] = [];
@@ -51,7 +52,9 @@ const MyEvents: React.FC = () => {
     const props = {
         literals: templateLiterals,
         handleClickCancelEvent,
+        currentPage, 
         events,
+        setCurrentPage
     };
 
     return <MyEventsTemplate {...props} />;

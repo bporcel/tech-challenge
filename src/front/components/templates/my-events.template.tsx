@@ -4,6 +4,7 @@ import Card from '../organisms/card.organism';
 import Events from '../../models/events.model';
 import Literals from '../../models/literals.model';
 import NoContent from '../pages/no-content.page';
+import PageNumbers from '../atoms/page-numbers.atom';
 
 const StyledDiv = styled.div`
     width: 45%;
@@ -13,13 +14,17 @@ const StyledDiv = styled.div`
 interface Props {
     events: Events[];
     literals: Literals;
+    currentPage: number;
     handleClickCancelEvent: Function;
+    setCurrentPage: Function;
 }
 
 const MyEventsTemplate: React.FC<Props> = ({
     events,
+    currentPage,
     literals,
     handleClickCancelEvent,
+    setCurrentPage,
 }) => {
     const cardLiterals = {
         youreIn: literals.youreIn,
@@ -27,19 +32,32 @@ const MyEventsTemplate: React.FC<Props> = ({
         free: literals.free,
     };
 
-    const renderEvents = (): JSX.Element[] =>
-        events.map((event: any, index: number) => (
-            <StyledDiv key={index}>
-                <p className="pl-1">{event.startDate}</p>
-                <Card
-                    events={event.events}
-                    literals={cardLiterals}
-                    initialButtonText={literals.youreIn}
-                    isButtonHovereable
-                    handleClickButton={handleClickCancelEvent}
-                />
-            </StyledDiv>
-        ));
+    const RESULTS_NUM = events.length < 5 ? events.length : 5;
+    const TOTAL_PAGES = Math.ceil(events.length / RESULTS_NUM);
+    const renderEvents = (): JSX.Element[] => {
+        const pageEvents: JSX.Element[] = [];
+        for (
+            let i = RESULTS_NUM * (currentPage - 1);
+            i < RESULTS_NUM * currentPage;
+            i++
+        ) {
+            if (i < events.length) {
+                pageEvents.push(
+                    <StyledDiv key={i}>
+                        <p className="pl-1">{events[i].startDate}</p>
+                        <Card
+                            events={events[i].events}
+                            literals={cardLiterals}
+                            initialButtonText={literals.youreIn}
+                            isButtonHovereable
+                            handleClickButton={handleClickCancelEvent}
+                        />
+                    </StyledDiv>
+                );
+            }
+        }
+        return pageEvents;
+    };
 
     return (
         <div className="w-100">
@@ -52,6 +70,13 @@ const MyEventsTemplate: React.FC<Props> = ({
             )}
 
             {renderEvents()}
+            {TOTAL_PAGES > 1 && (
+                <PageNumbers
+                    {...{ currentPage }}
+                    {...{ setCurrentPage }}
+                    totalPages={TOTAL_PAGES}
+                />
+            )}
         </div>
     );
 };

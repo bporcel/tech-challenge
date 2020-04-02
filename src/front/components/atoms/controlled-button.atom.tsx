@@ -3,34 +3,42 @@ import styled, { css } from 'styled-components';
 import Theme from '../../styles/theme';
 
 const StyledButton = styled.button`
-    color: ${Theme.colors.white};
     background-color: ${Theme.colors.blue};
-    border: solid 2px;
+    border: solid 2px ${Theme.colors.blue};
     padding: 0.5em 1em;
     font-weight: bold;
-    border-radius: 0.1em;
     min-width: 7em;
+    color: ${Theme.colors.white};
 
     &:focus {
         outline: none;
     }
 
-    ${({ large }) =>
-        large &&
+    &:hover {
+        color: ${Theme.colors.white};
+        background-color: ${Theme.colors.blue};
+    }
+
+    ${({ page }) =>
+        page &&
         css`
-            font-size: 18px;
+            width: 1em;
+            color: ${Theme.colors.blue};
+            background-color: ${Theme.colors.white};
+            margin: 0 0.5em;
         `}
 `;
 
 interface Props {
     text: string;
     id?: string;
-    large?: boolean;
+    page?: boolean;
+    handleClick?: Function;
 }
 
-const Button: React.FC<Props> = ({ id, large, text }) => {
+const Button: React.FC<Props> = ({ id, page, text, handleClick }) => {
     return (
-        <StyledButton {...{ id }} {...{ large }}>
+        <StyledButton {...{ id }} {...{ page }} onClick={handleClick}>
             {text}
         </StyledButton>
     );

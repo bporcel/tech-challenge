@@ -8,6 +8,7 @@ import Card from '../organisms/card.organism';
 import Modal from '../molecules/modal.molecule';
 import Filter from '../organisms/filter.organism';
 import NoContent from '../pages/no-content.page';
+import PageNumbers from '../atoms/page-numbers.atom';
 
 const StyledError = styled.div`
     color: ${Theme.colors.red};
@@ -22,11 +23,19 @@ const StyledRenderEvents = styled.div`
     margin: auto;
 `;
 
+const StyledPageNumbers = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+`;
+
 interface Props {
     events: Events[];
     allEvents: Events[];
     cities: Cities[];
+    currentPage: number;
     literals: Literals;
+    setCurrentPage: Function;
     handleClickJoin: Function;
     handleFilterEvents: Function;
 }
@@ -38,11 +47,40 @@ const AllEventsTemplate: React.FC<Props> = ({
     literals,
     handleClickJoin,
     handleFilterEvents,
+    currentPage,
+    setCurrentPage,
 }) => {
+    const RESULTS_NUM = events.length < 5 ? events.length : 5;
+    const TOTAL_PAGES = events.length / RESULTS_NUM;
     const [toogleModal, setToogleModal] = useState<boolean>(false);
     const [currentModalEvent, setCurrentModalEvent] = useState<Event>();
     const [buttonToChange, setButtonToChange] = useState<string[]>([]);
-    
+
+    const renderEvents = (): JSX.Element[] => {
+        const pageEvents: JSX.Element[] = [];
+        for (
+            let i = RESULTS_NUM * (currentPage - 1);
+            i < RESULTS_NUM * currentPage;
+            i++
+        ) {
+            if (i < events.length) {
+                pageEvents.push(
+                    <StyledRenderEvents key={i}>
+                        <p className="pl-1">{events[i].startDate}</p>
+                        <Card
+                            events={events[i].events}
+                            literals={cardLiterals}
+                            handleClickButton={handleClickSignUp}
+                            initialButtonText={literals.signUp}
+                            {...{ buttonToChange }}
+                        />
+                    </StyledRenderEvents>
+                );
+            }
+        }
+        return pageEvents;
+    };
+
     useEffect(() => {
         const aux: string[] = [];
         Object.keys(sessionStorage).forEach(key => {
@@ -72,20 +110,6 @@ const AllEventsTemplate: React.FC<Props> = ({
         aux.push(id);
         setButtonToChange(aux);
     };
-
-    const renderEvents = (): JSX.Element[] =>
-        events.map((event: any, index: number) => (
-            <StyledRenderEvents key={index}>
-                <p className="pl-1">{event.startDate}</p>
-                <Card
-                    events={event.events}
-                    literals={cardLiterals}
-                    handleClickButton={handleClickSignUp}
-                    initialButtonText={literals.signUp}
-                    {...{ buttonToChange }}
-                />
-            </StyledRenderEvents>
-        ));
 
     const modalLiterals = {
         modalSignUp: literals.modalSignUp,
@@ -128,6 +152,13 @@ const AllEventsTemplate: React.FC<Props> = ({
                     </>
                 ) : (
                     <NoContent />
+                )}
+                {TOTAL_PAGES > 1 && (
+                    <PageNumbers
+                        {...{ currentPage }}
+                        {...{ setCurrentPage }}
+                        totalPages={TOTAL_PAGES}
+                    />
                 )}
             </div>
             {toogleModal && (
