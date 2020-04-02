@@ -102,7 +102,8 @@ html{
 
 .title {
     font-family: ${Theme.font.family.courier};
-    font-weight: 100;
+    color: ${Theme.colors.darkGray};
+    font-weight: bold;
 }
 
 .bold {

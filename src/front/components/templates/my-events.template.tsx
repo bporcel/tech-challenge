@@ -1,8 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 import Card from '../organisms/card.organism';
 import Events from '../../models/events.model';
 import Literals from '../../models/literals.model';
 import NoContent from '../pages/no-content.page';
+
+const StyledDiv = styled.div`
+    width: 45%;
+    margin: auto;
+`;
 
 interface Props {
     events: Events[];
@@ -23,7 +29,7 @@ const MyEventsTemplate: React.FC<Props> = ({
 
     const renderEvents = (): JSX.Element[] =>
         events.map((event: any, index: number) => (
-            <div key={index}>
+            <StyledDiv key={index}>
                 <p className="pl-1">{event.startDate}</p>
                 <Card
                     events={event.events}
@@ -32,18 +38,20 @@ const MyEventsTemplate: React.FC<Props> = ({
                     isButtonHovereable
                     handleClickButton={handleClickCancelEvent}
                 />
-            </div>
+            </StyledDiv>
         ));
 
     return (
-        <div>
+        <div className="w-100">
             {events.length > 0 ? (
-                <h1 className="title">{literals.myNextEvents}</h1>
+                <StyledDiv>
+                    <h1 className="title">{literals.myNextEvents}</h1>
+                </StyledDiv>
             ) : (
                 <NoContent />
             )}
 
-            <div>{renderEvents()}</div>
+            {renderEvents()}
         </div>
     );
 };

@@ -14,7 +14,6 @@ const StyledNoContent = styled.div`
 const StyledTextBox = styled.div`
     background-color: ${Theme.colors.white};
     margin-bottom: 50px;
-    color: ${Theme.colors.darkGray};
 `;
 
 interface Props {
@@ -31,7 +30,7 @@ const NoContentTemplate: React.FC<Props> = ({
     return (
         <StyledNoContent className="d-flex flex-column">
             <StyledTextBox className="bordered pd-1">
-                <h1 className="title bold">
+                <h1 className="title">
                     {button ? literals.myEventsEmpty : literals.noEvents}
                 </h1>
             </StyledTextBox>
