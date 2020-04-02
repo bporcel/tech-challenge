@@ -13,6 +13,7 @@ interface Props {
     events: Event[];
     literals: Literals;
     isButtonHovereable?: boolean;
+    buttonToChange?: string[];
     initialButtonText: string;
     handleClickButton: Function;
 }
@@ -20,6 +21,7 @@ interface Props {
 const Card: React.FC<Props> = ({
     events,
     literals,
+    buttonToChange,
     isButtonHovereable,
     initialButtonText,
     handleClickButton,
@@ -37,6 +39,7 @@ const Card: React.FC<Props> = ({
                     {...{ isButtonHovereable }}
                     {...{ initialButtonText }}
                     {...{ handleClickButton }}
+                    {...{buttonToChange}}
                 />
                 {index < events.length - 1 && <hr className="separator" />}
             </div>

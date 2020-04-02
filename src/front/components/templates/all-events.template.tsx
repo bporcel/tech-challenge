@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Theme from '../../styles/theme';
 import Literals from '../../models/literals.model';
@@ -41,6 +41,16 @@ const AllEventsTemplate: React.FC<Props> = ({
 }) => {
     const [toogleModal, setToogleModal] = useState<boolean>(false);
     const [currentModalEvent, setCurrentModalEvent] = useState<Event>();
+    const [buttonToChange, setButtonToChange] = useState<string[]>([]);
+    
+    useEffect(() => {
+        const aux: string[] = [];
+        Object.keys(sessionStorage).forEach(key => {
+            aux.push(key);
+        });
+
+        setButtonToChange(aux);
+    }, []);
 
     const handleClickSignUp = (event: Event): void => {
         const found = events.find(({ events }) =>
@@ -57,6 +67,12 @@ const AllEventsTemplate: React.FC<Props> = ({
         setToogleModal(!toogleModal);
     };
 
+    const changeButton = ({ id }): void => {
+        const aux: string[] = buttonToChange;
+        aux.push(id);
+        setButtonToChange(aux);
+    };
+
     const renderEvents = (): JSX.Element[] =>
         events.map((event: any, index: number) => (
             <StyledRenderEvents key={index}>
@@ -66,6 +82,7 @@ const AllEventsTemplate: React.FC<Props> = ({
                     literals={cardLiterals}
                     handleClickButton={handleClickSignUp}
                     initialButtonText={literals.signUp}
+                    {...{ buttonToChange }}
                 />
             </StyledRenderEvents>
         ));
@@ -116,10 +133,11 @@ const AllEventsTemplate: React.FC<Props> = ({
             {toogleModal && (
                 <Modal
                     event={currentModalEvent}
+                    literals={modalLiterals}
                     {...{ handleClickToogleModal }}
                     {...{ handleClickSignUp }}
                     {...{ handleClickJoin }}
-                    literals={modalLiterals}
+                    {...{ changeButton }}
                 />
             )}
         </>

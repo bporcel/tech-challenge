@@ -83,8 +83,6 @@ const AllEvents: React.FC = () => {
             filterValues.isFree = '';
         }
 
-        // console.log('filterValues', filterValues)
-
         normalizedEvents.current.forEach(eventGroup => {
             eventGroup.events.forEach(event => {
                 if (filterValues.from === '' || filterValues.to === '') {
@@ -114,11 +112,10 @@ const AllEvents: React.FC = () => {
         setFilteredEvents(groupEventsByDate(filteredEvents));
     };
 
-    const handleClickJoin = ({ id }): boolean => {
+    const handleClickJoin = ({ id }): void => {
         const found = events.current.find(event => `${event.id}` === id);
 
         sessionStorage.setItem(id, JSON.stringify(found));
-        return true;
     };
 
     const templateLiterals = {

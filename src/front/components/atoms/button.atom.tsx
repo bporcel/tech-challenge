@@ -64,7 +64,7 @@ const StyledButton = styled.button`
 `;
 
 interface Props {
-    type: 'primary' | 'secondary' | 'close' | 'warning' | string;
+    type: 'primary' | 'secondary' | 'close' | 'warning';
     initialText: string;
     id?: string;
     isHovereable?: boolean;
@@ -83,14 +83,9 @@ const Button: React.FC<Props> = ({
     initialText,
 }) => {
     const [text, setText] = useState(initialText);
-    const [disabled, setDisabled] = useState(false);
 
     const handleClickMiddleman = ({ target }) => {
-        const shouldTextChange = handleClick(target);
-        if (shouldTextChange) {
-            setText(literals.youreIn);
-            setDisabled(shouldTextChange);
-        }
+        handleClick(target);
     };
 
     const handleHover = (): void => {
@@ -108,7 +103,6 @@ const Button: React.FC<Props> = ({
             {...{ id }}
             {...{ type }}
             {...{ large }}
-            {...{ disabled }}
             onClick={handleClickMiddleman}
             onMouseOver={handleHover}
             onMouseOut={handleHover}

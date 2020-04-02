@@ -48,11 +48,13 @@ interface Props {
     literals: Literals;
     handleClickToogleModal: Function;
     handleClickJoin: Function;
+    changeButton: Function;
 }
 
 const Modal: React.FC<Props> = ({
     handleClickToogleModal,
     handleClickJoin,
+    changeButton,
     event,
     literals,
 }) => {
@@ -109,9 +111,10 @@ const Modal: React.FC<Props> = ({
                             id={`${event.id}`}
                             type="secondary"
                             initialText={literals.join}
-                            handleClick={(id: string): void => {
+                            handleClick={target => {
                                 handleClickToogleModal();
-                                handleClickJoin(id);
+                                handleClickJoin(target);
+                                changeButton(target);
                             }}
                         />
                     </div>

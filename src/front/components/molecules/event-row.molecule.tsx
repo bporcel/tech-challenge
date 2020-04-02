@@ -1,8 +1,9 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Theme from '../../styles/theme';
 import Event from '../atoms/event.atom';
 import Button from '../atoms/button.atom';
+import ControlledButton from '../atoms/controlled-button.atom';
 import { Event as EventModel } from '../../models/events.model';
 import Literals from '../../models/literals.model';
 
@@ -17,6 +18,7 @@ interface Props {
     literals: Literals;
     isButtonHovereable: boolean;
     initialButtonText: string;
+    buttonToChange?: string[];
     handleClickButton: Function;
 }
 
@@ -25,11 +27,24 @@ const EventRow: React.FC<Props> = ({
     literals,
     handleClickButton,
     isButtonHovereable,
+    buttonToChange,
     initialButtonText,
 }) => {
     const buttonLiterals = {
         youreIn: literals.youreIn,
         cancel: literals.cancel,
+    };
+
+    const findId = (): boolean => {
+        if (buttonToChange) {
+            let found = false;
+            buttonToChange.forEach(id => {
+                if (id === `${event.id}`) {
+                    found = true;
+                }
+            });
+            return found;
+        }
     };
 
     return (
@@ -46,14 +61,21 @@ const EventRow: React.FC<Props> = ({
                 <StyledFree>
                     {event.isFree ? `${literals.free}` : ''}
                 </StyledFree>
-                <Button
-                    id={`${event.id}`}
-                    type="primary"
-                    handleClick={() => handleClickButton(event)}
-                    literals={buttonLiterals}
-                    isHovereable={isButtonHovereable}
-                    initialText={initialButtonText}
-                />
+                {findId() ? (
+                    <ControlledButton
+                        id={`${event.id}`}
+                        text={literals.youreIn}
+                    />
+                ) : (
+                    <Button
+                        id={`${event.id}`}
+                        type="primary"
+                        handleClick={() => handleClickButton(event)}
+                        literals={buttonLiterals}
+                        isHovereable={isButtonHovereable}
+                        initialText={initialButtonText}
+                    />
+                )}
             </div>
         </div>
     );
