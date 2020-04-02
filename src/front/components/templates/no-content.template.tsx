@@ -30,7 +30,7 @@ const NoContentTemplate: React.FC<Props> = ({
     return (
         <StyledNoContent className="d-flex flex-column">
             <StyledTextBox className="bordered pd-1">
-                <h1 className="title">
+                <h1 className="title bold">
                     {button ? literals.myEventsEmpty : literals.noEvents}
                 </h1>
             </StyledTextBox>

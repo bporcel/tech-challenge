@@ -100,6 +100,10 @@ html{
     -ms-filter: blur(1px);
     filter: blur(1px);
 }
+
+.bold {
+    font-weight: bold;
+}
 `;
 
 export default GlobalStyles;
