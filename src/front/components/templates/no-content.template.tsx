@@ -14,7 +14,7 @@ const StyledNoContent = styled.div`
 const StyledTextBox = styled.div`
     background-color: ${Theme.colors.white};
     margin-bottom: 50px;
-    color: ${Theme.colors.darkGray}
+    color: ${Theme.colors.darkGray};
 `;
 
 interface Props {

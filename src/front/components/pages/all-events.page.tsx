@@ -83,6 +83,8 @@ const AllEvents: React.FC = () => {
             filterValues.isFree = '';
         }
 
+        // console.log('filterValues', filterValues)
+
         normalizedEvents.current.forEach(eventGroup => {
             eventGroup.events.forEach(event => {
                 if (filterValues.from === '' || filterValues.to === '') {

@@ -91,7 +91,10 @@ const Modal: React.FC<Props> = ({
                     />
                 </div>
                 <div className="modal-body pd-1">
-                    <p>{formatModalTextName()}<span className="bold">{event.name}</span></p>
+                    <p>
+                        {formatModalTextName()}
+                        <span className="bold">{event.name}</span>
+                    </p>
                     <p>{formatModalTextDateAndLocation()}</p>
                     <p>Are you sure?</p>
                 </div>

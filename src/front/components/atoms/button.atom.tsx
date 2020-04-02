@@ -84,7 +84,7 @@ const Button: React.FC<Props> = ({
 }) => {
     const [text, setText] = useState(initialText);
     const [disabled, setDisabled] = useState(false);
-    
+
     const handleClickMiddleman = ({ target }) => {
         const shouldTextChange = handleClick(target);
         if (shouldTextChange) {
