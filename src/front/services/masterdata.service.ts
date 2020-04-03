@@ -7,6 +7,15 @@ import Events, { Event } from '../models/events.model';
 import Cities from '../models/cities.model';
 
 const { localhostEndPoint } = routes;
+const { productionEndPoint } = routes;
+
+let endPoint;
+
+if(process.env.ENVIRONMENT === 'dev'){
+    endPoint = localhostEndPoint;
+}else if(process.env.ENVIRONMENT === 'prod'){
+    endPoint = productionEndPoint;
+}
 
 export const groupEventsByDate = (auxEvents): Events[] => {
     const events: Events[] = [];
@@ -75,21 +84,21 @@ export const normalizeEvents = (data: EventsResponse[]): Events[] => {
 
 export const getCities = (): Promise<Cities[]> =>
     new Promise<Cities[]>((resolve, reject) => {
-        get<CitiesResponse[]>(`${localhostEndPoint}/cities`)
+        get<CitiesResponse[]>(`${endPoint}/cities`)
             .then(resolve)
             .catch(reject);
     });
 
 export const getEvents = (): Promise<EventsResponse[]> =>
     new Promise<EventsResponse[]>((resolve, reject) => {
-        get<EventsResponse[]>(`${localhostEndPoint}/events`)
+        get<EventsResponse[]>(`${endPoint}/events`)
             .then(resolve)
             .catch(reject);
     });
 
 export const getNormalizedEvents = (): Promise<Events[]> =>
     new Promise<Events[]>((resolve, reject) => {
-        get<EventsResponse[]>(`${localhostEndPoint}/events`)
+        get<EventsResponse[]>(`${endPoint}/events`)
             .then(data => {
                 resolve(normalizeEvents(data));
             })

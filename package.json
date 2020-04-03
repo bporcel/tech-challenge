@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-front:dev": "webpack-dev-server --open",
+    "build-front:dev": "webpack-dev-server --env.ENVIRONMENT=dev --open",
     "build-back:dev": "json-server --watch \"src/back/db.js\"",
-    "build-back:pro": "json-server --watch \"src/back/db.js\" --static ./dist",
-    "build-front:pro": "webpack --mode production",
+    "build-front:pro": "webpack --env.ENVIRONMENT=prod --mode production",
+    "build-back:pro": "json-server \"src/back/db.js\" --host 0.0.0.0 --static ./dist",
     "prettier": "prettier --config .prettierrc --write \"src/**/*.{tsx,ts,jsx,js,json}\"",
     "lint": "eslint --fix \"src/front/**/*.{tsx,ts,jsx,js}\""
   },
