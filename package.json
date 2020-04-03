@@ -7,7 +7,7 @@
     "build-front:dev": "webpack-dev-server --env.ENVIRONMENT=dev --open",
     "build-back:dev": "json-server --watch \"src/back/db.js\"",
     "build-front:pro": "webpack --env.ENVIRONMENT=prod --mode production",
-    "build-back:pro": "json-server \"src/back/db.js\" --host 0.0.0.0 --static ./dist",
+    "build-back:pro": "json-server \"src/back/db.js\" --host 0.0.0.0 --port 8080 --static ./dist",
     "prettier": "prettier --config .prettierrc --write \"src/**/*.{tsx,ts,jsx,js,json}\"",
     "lint": "eslint --fix \"src/front/**/*.{tsx,ts,jsx,js}\""
   },
