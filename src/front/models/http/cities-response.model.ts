@@ -1,3 +1,3 @@
 import IdName from '../id-name.model';
 
-export default type CitiesResponse = IdName
+export default interface CitiesResponse extends IdName {}
