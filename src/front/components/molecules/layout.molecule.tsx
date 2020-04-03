@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Header from '../atoms/header.atom';
 
 const StyledLayout = styled.div`
-    margin-bottom: 500px;
+    margin-bottom: 300px;
 `;
 
 interface Props {

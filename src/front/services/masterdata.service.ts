@@ -60,7 +60,7 @@ export const normalizeEvents = (data: EventsResponse[]): Events[] => {
             ...event,
             from: from.format('HH:mm'),
             duration: `${duration.hours()}${
-                duration.minutes() !== 0 ? `:${duration.minutes()}h` : 'h'
+                0 !== duration.minutes() ? `:${duration.minutes()}h` : 'h'
             }`,
         };
 

@@ -39,7 +39,7 @@ const Card: React.FC<Props> = ({
                     {...{ isButtonHovereable }}
                     {...{ initialButtonText }}
                     {...{ handleClickButton }}
-                    {...{buttonToChange}}
+                    {...{ buttonToChange }}
                 />
                 {index < events.length - 1 && <hr className="separator" />}
             </div>

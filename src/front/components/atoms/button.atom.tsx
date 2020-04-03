@@ -22,7 +22,7 @@ const StyledButton = styled.button`
         `}
 
     ${({ type }) =>
-        (type === 'primary' &&
+        ('primary' === type &&
             css`
                 color: ${Theme.colors.blue};
                 border-color: ${Theme.colors.blue};
@@ -32,7 +32,7 @@ const StyledButton = styled.button`
                     cursor: pointer;
                 }
             `) ||
-        (type === 'secondary' &&
+        ('secondary' === type &&
             css`
                 color: ${Theme.colors.green};
                 border-color: ${Theme.colors.green};
@@ -42,7 +42,7 @@ const StyledButton = styled.button`
                     cursor: pointer;
                 }
             `) ||
-        (type === 'close' &&
+        ('close' === type &&
             css`
                 color: ${Theme.colors.gray};
                 border: none;
@@ -51,7 +51,7 @@ const StyledButton = styled.button`
                 padding: 0.3em 0.5em 0 0;
                 min-width: auto;
             `) ||
-        (type === 'warning' &&
+        ('warning' === type &&
             css`
                 color: ${Theme.colors.orange};
                 border-color: ${Theme.colors.orange};

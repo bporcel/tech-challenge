@@ -59,14 +59,14 @@ const Modal: React.FC<Props> = ({
     literals,
 }) => {
     document.onkeydown = event => {
-        if (event.key === 'Escape') {
+        if ('Escape' === event.key) {
             handleClickToogleModal();
         }
     };
 
     document.onclick = ({ target }: any) => {
         const { id } = target;
-        if (id === 'background') {
+        if ('background' === id) {
             handleClickToogleModal();
         }
     };

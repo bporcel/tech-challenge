@@ -22,7 +22,7 @@ const StyledLi = styled.li`
 `;
 
 const StyledImg = styled.img`
-    width: 10%;
+    width: 20%;
 `;
 
 const StyledHeader = styled.div`
@@ -33,7 +33,15 @@ const Header: React.FC = () => {
     return (
         <>
             <StyledHeader className="d-flex flex-row align-items-center justify-around pd-1">
-                <StyledImg src={logo} alt="trivago logo" className="ml-1" />
+                <div>
+                    <NavLink to="/">
+                        <StyledImg
+                            src={logo}
+                            alt="trivago logo"
+                            className="ml-1"
+                        />
+                    </NavLink>
+                </div>
                 <nav>
                     <ul className="inline-list mr-0 pd-0">
                         <StyledLi className="pl-1">

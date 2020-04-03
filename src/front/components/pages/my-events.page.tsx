@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { normalizeEvents } from '../../services/masterdata.service';
+import { normalizeEvents, getCities } from '../../services/masterdata.service';
 import EventsResponse from '../../models/http/events-response.model';
+import Cities from '../../models/cities.model';
 import literals from '../../resources/i18n/en.json';
 import Events, { Event } from '../../models/events.model';
 import MyEventsTemplate from '../templates/my-events.template';
 
 const MyEvents: React.FC = () => {
     const [events, setEvents] = useState<Events[]>([]);
+    const [cities, setCities] = useState<Cities[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
+
+    const mapEventsAndCities = eventsRes => {
+        eventsRes.forEach(eventGroup => {
+            eventGroup.events.forEach((event, index) => {
+                const found = cities.find(city => city.id === event.city);
+                found &&
+                    (eventGroup.events[index] = {
+                        ...event,
+                        city: found.name,
+                    });
+            });
+        });
+
+        return eventsRes;
+    };
 
     const getMyEvents = (): void => {
         const eventsAux: EventsResponse[] = [];
-        for (let i in sessionStorage) {
+        for (const i in sessionStorage) {
             const item = sessionStorage.getItem(i);
 
             if (item) {
@@ -20,12 +37,18 @@ const MyEvents: React.FC = () => {
             }
         }
 
-        setEvents(normalizeEvents(eventsAux));
+        setEvents(mapEventsAndCities(normalizeEvents(eventsAux)));
     };
 
     useEffect(() => {
-        getMyEvents();
+        getCities().then(setCities);
     }, []);
+
+    useEffect(() => {
+        if (0 < cities.length) {
+            getMyEvents();
+        }
+    }, [cities]);
 
     const templateLiterals = {
         myNextEvents: literals.myNextEvents,
@@ -44,6 +67,10 @@ const MyEvents: React.FC = () => {
             if (found) {
                 sessionStorage.removeItem(`${found.id}`);
                 getMyEvents();
+
+                if (1 === events.length % 5 && 2 < events.length) {
+                    setCurrentPage(currentPage - 1);
+                }
                 break;
             }
         }
@@ -52,9 +79,9 @@ const MyEvents: React.FC = () => {
     const props = {
         literals: templateLiterals,
         handleClickCancelEvent,
-        currentPage, 
+        currentPage,
         events,
-        setCurrentPage
+        setCurrentPage,
     };
 
     return <MyEventsTemplate {...props} />;

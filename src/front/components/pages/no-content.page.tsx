@@ -9,10 +9,10 @@ const NoContent: React.FC = () => {
     let button;
     const history = useHistory();
 
-    if (location.pathname === '/') {
+    if ('/' === location.pathname) {
         templateLiterals = { noEvents: literals.noEvents };
         button = false;
-    } else if (location.pathname === '/my-events') {
+    } else if ('/my-events' === location.pathname) {
         templateLiterals = {
             myEventsEmpty: literals.myEventsEmpty,
             seeAllAvailableEvents: literals.seeAllAvailableEvents,

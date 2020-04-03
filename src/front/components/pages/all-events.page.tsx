@@ -23,7 +23,7 @@ const AllEvents: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        if (cities.length > 0) {
+        if (0 < cities.length) {
             getEvents().then(eventsRes => {
                 events.current = eventsRes;
             });
@@ -53,10 +53,20 @@ const AllEvents: React.FC = () => {
         let found = true;
 
         Object.keys(filterValues).forEach(key => {
-            if (key !== 'from' && key !== 'to') {
+            const filterKey = filterValues[key];
+            const eventKey = event[key];
+
+            if ('from' !== key && 'to' !== key) {
                 if (
-                    filterValues[key] !== '' &&
-                    event[key] !== filterValues[key]
+                    'isFree' !== key &&
+                    '' !== filterKey &&
+                    !eventKey.toUpperCase().includes(filterKey.toUpperCase())
+                ) {
+                    found = false;
+                } else if (
+                    'isFree' === key &&
+                    '' !== filterKey &&
+                    filterKey !== eventKey
                 ) {
                     found = false;
                 }
@@ -77,14 +87,14 @@ const AllEvents: React.FC = () => {
     };
 
     const handleFilterEvents = (filterValues): void => {
-        let filteredEvents = [];
-        if (filterValues.isFree === false) {
+        const filteredEvents = [];
+        if (false === filterValues.isFree) {
             filterValues.isFree = '';
         }
 
         normalizedEvents.current.forEach(eventGroup => {
             eventGroup.events.forEach(event => {
-                if (filterValues.from === '' || filterValues.to === '') {
+                if ('' === filterValues.from || '' === filterValues.to) {
                     if (findKeyInEvent(filterValues, event)) {
                         const auxEvent = {
                             startDate: eventGroup.startDate,
@@ -97,7 +107,6 @@ const AllEvents: React.FC = () => {
                         findKeyInEvent(filterValues, event) &&
                         checkTime(filterValues, event)
                     ) {
-                        console.log('object');
                         const auxEvent = {
                             startDate: eventGroup.startDate,
                             ...event,

@@ -32,8 +32,9 @@ const MyEventsTemplate: React.FC<Props> = ({
         free: literals.free,
     };
 
-    const RESULTS_NUM = events.length < 5 ? events.length : 5;
+    const RESULTS_NUM = 5 > events.length ? events.length : 5;
     const TOTAL_PAGES = Math.ceil(events.length / RESULTS_NUM);
+
     const renderEvents = (): JSX.Element[] => {
         const pageEvents: JSX.Element[] = [];
         for (
@@ -61,7 +62,7 @@ const MyEventsTemplate: React.FC<Props> = ({
 
     return (
         <div className="w-100">
-            {events.length > 0 ? (
+            {0 < events.length ? (
                 <StyledDiv>
                     <h1 className="title">{literals.myNextEvents}</h1>
                 </StyledDiv>
@@ -70,7 +71,7 @@ const MyEventsTemplate: React.FC<Props> = ({
             )}
 
             {renderEvents()}
-            {TOTAL_PAGES > 1 && (
+            {1 < TOTAL_PAGES && (
                 <PageNumbers
                     {...{ currentPage }}
                     {...{ setCurrentPage }}

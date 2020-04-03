@@ -50,7 +50,7 @@ const AllEventsTemplate: React.FC<Props> = ({
     currentPage,
     setCurrentPage,
 }) => {
-    const RESULTS_NUM = events.length < 5 ? events.length : 5;
+    const RESULTS_NUM = 5 > events.length ? events.length : 5;
     const TOTAL_PAGES = events.length / RESULTS_NUM;
     const [toogleModal, setToogleModal] = useState<boolean>(false);
     const [currentModalEvent, setCurrentModalEvent] = useState<Event>();
@@ -137,7 +137,7 @@ const AllEventsTemplate: React.FC<Props> = ({
     return (
         <>
             <div className="w-100">
-                {allEvents.length > 0 ? (
+                {0 < allEvents.length ? (
                     <>
                         <Filter
                             literals={filterLiterals}
@@ -145,7 +145,7 @@ const AllEventsTemplate: React.FC<Props> = ({
                             {...{ cities }}
                             {...{ handleFilterEvents }}
                         />
-                        {events.length <= 0 && (
+                        {0 >= events.length && (
                             <StyledError>{literals.noFilterEvents}</StyledError>
                         )}
                         {renderEvents()}
@@ -153,7 +153,7 @@ const AllEventsTemplate: React.FC<Props> = ({
                 ) : (
                     <NoContent />
                 )}
-                {TOTAL_PAGES > 1 && (
+                {1 < TOTAL_PAGES && (
                     <PageNumbers
                         {...{ currentPage }}
                         {...{ setCurrentPage }}

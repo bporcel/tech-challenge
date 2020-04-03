@@ -5,7 +5,7 @@ const useFormState: Function = initialValues => {
 
     const handleChange = target => {
         const { id, value, checked, type } = target;
-        if (id === 'reset') {
+        if ('reset' === id) {
             let auxFields;
             Object.keys(fields).forEach(key => {
                 auxFields = {
@@ -15,7 +15,7 @@ const useFormState: Function = initialValues => {
             });
             setFields(auxFields);
         } else {
-            if (type === 'checkbox') {
+            if ('checkbox' === type) {
                 setFields({
                     ...fields,
                     [id]: checked,

@@ -21,7 +21,7 @@ const PageNumbers: React.FC<Props> = ({
 }) => {
     return (
         <StyledPageNumbers>
-            {currentPage > 1 && (
+            {1 < currentPage && (
                 <ControlledButton
                     text="Previous"
                     page
