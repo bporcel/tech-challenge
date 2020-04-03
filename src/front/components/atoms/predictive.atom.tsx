@@ -35,7 +35,7 @@ const Select: React.FC<Props> = ({
     label,
     handleChange,
 }) => {
-    const renderOptions = () => {
+    const renderOptions = (): JSX.Element[] => {
         const listOptions: IdName[] = [];
 
         options.forEach((option: IdName) => {
@@ -50,7 +50,7 @@ const Select: React.FC<Props> = ({
         ));
     };
 
-    const handleChangeMiddleman = ({ target }) => {
+    const handleChangeMiddleman = ({ target }): void => {
         handleChange(target);
     };
 

@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import Theme from './theme';
+// eslint-disable-next-line
 // @ts-ignore
 import CourierStd from '../../fonts/CourierStd.otf';
 

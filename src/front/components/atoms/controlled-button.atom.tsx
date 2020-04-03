@@ -19,7 +19,7 @@ const StyledButton = styled.button`
         background-color: ${Theme.colors.blue};
     }
 
-    ${({ page }) =>
+    ${({ page }): void =>
         page &&
         css`
             width: 1em;

@@ -20,7 +20,7 @@ const NoContent: React.FC = () => {
         button = true;
     }
 
-    const handleClickGoToAllEvents = () => {
+    const handleClickGoToAllEvents = (): void => {
         history.push('/');
     };
 

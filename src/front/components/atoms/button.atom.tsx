@@ -15,13 +15,13 @@ const StyledButton = styled.button`
         outline: none;
     }
 
-    ${({ large }) =>
+    ${({ large }): void =>
         large &&
         css`
             font-size: 18px;
         `}
 
-    ${({ type }) =>
+    ${({ type }): void =>
         ('primary' === type &&
             css`
                 color: ${Theme.colors.blue};
@@ -84,7 +84,7 @@ const Button: React.FC<Props> = ({
 }) => {
     const [text, setText] = useState(initialText);
 
-    const handleClickMiddleman = ({ target }) => {
+    const handleClickMiddleman = ({ target }): void => {
         handleClick(target);
     };
 

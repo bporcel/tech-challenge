@@ -2,10 +2,15 @@ import React from 'react';
 import Literals from '../../models/literals.model';
 import TimeInput from '../atoms/time-input.atom';
 
+interface Values {
+    from: string;
+    to: string;
+}
+
 interface Props {
     literals: Literals;
-    values: any;
-    handleChange: any;
+    values: Values;
+    handleChange: Function;
 }
 
 const TimeRange: React.FC<Props> = ({ literals, values, handleChange }) => {

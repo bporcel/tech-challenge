@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Theme from '../../styles/theme';
 import literals from '../../resources/i18n/en.json';
+// eslint-disable-next-line
 // @ts-ignore
 import logo from '../../resources/images/newlogo.png';
 

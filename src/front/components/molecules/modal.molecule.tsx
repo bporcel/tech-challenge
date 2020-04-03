@@ -58,13 +58,13 @@ const Modal: React.FC<Props> = ({
     event,
     literals,
 }) => {
-    document.onkeydown = event => {
+    document.onkeydown = (event): void => {
         if ('Escape' === event.key) {
             handleClickToogleModal();
         }
     };
 
-    document.onclick = ({ target }: any) => {
+    document.onclick = ({ target }: any): void => {
         const { id } = target;
         if ('background' === id) {
             handleClickToogleModal();
@@ -111,7 +111,7 @@ const Modal: React.FC<Props> = ({
                             id={`${event.id}`}
                             type="secondary"
                             initialText={literals.join}
-                            handleClick={target => {
+                            handleClick={(target): void => {
                                 handleClickToogleModal();
                                 handleClickJoin(target);
                                 changeButton(target);

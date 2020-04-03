@@ -23,12 +23,6 @@ const StyledRenderEvents = styled.div`
     margin: auto;
 `;
 
-const StyledPageNumbers = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-top: 2em;
-`;
-
 interface Props {
     events: Events[];
     allEvents: Events[];
@@ -56,31 +50,6 @@ const AllEventsTemplate: React.FC<Props> = ({
     const [currentModalEvent, setCurrentModalEvent] = useState<Event>();
     const [buttonToChange, setButtonToChange] = useState<string[]>([]);
 
-    const renderEvents = (): JSX.Element[] => {
-        const pageEvents: JSX.Element[] = [];
-        for (
-            let i = RESULTS_NUM * (currentPage - 1);
-            i < RESULTS_NUM * currentPage;
-            i++
-        ) {
-            if (i < events.length) {
-                pageEvents.push(
-                    <StyledRenderEvents key={i}>
-                        <p className="pl-1">{events[i].startDate}</p>
-                        <Card
-                            events={events[i].events}
-                            literals={cardLiterals}
-                            handleClickButton={handleClickSignUp}
-                            initialButtonText={literals.signUp}
-                            {...{ buttonToChange }}
-                        />
-                    </StyledRenderEvents>
-                );
-            }
-        }
-        return pageEvents;
-    };
-
     useEffect(() => {
         const aux: string[] = [];
         Object.keys(sessionStorage).forEach(key => {
@@ -89,6 +58,10 @@ const AllEventsTemplate: React.FC<Props> = ({
 
         setButtonToChange(aux);
     }, []);
+
+    const handleClickToogleModal = (): void => {
+        setToogleModal(!toogleModal);
+    };
 
     const handleClickSignUp = (event: Event): void => {
         const found = events.find(({ events }) =>
@@ -99,10 +72,6 @@ const AllEventsTemplate: React.FC<Props> = ({
             date: found.startDate,
         });
         handleClickToogleModal();
-    };
-
-    const handleClickToogleModal = (): void => {
-        setToogleModal(!toogleModal);
     };
 
     const changeButton = ({ id }): void => {
@@ -132,6 +101,31 @@ const AllEventsTemplate: React.FC<Props> = ({
         from: literals.from,
         to: literals.to,
         free: literals.free,
+    };
+
+    const renderEvents = (): JSX.Element[] => {
+        const pageEvents: JSX.Element[] = [];
+        for (
+            let i = RESULTS_NUM * (currentPage - 1);
+            i < RESULTS_NUM * currentPage;
+            i++
+        ) {
+            if (i < events.length) {
+                pageEvents.push(
+                    <StyledRenderEvents key={i}>
+                        <p className="pl-1">{events[i].startDate}</p>
+                        <Card
+                            events={events[i].events}
+                            literals={cardLiterals}
+                            handleClickButton={handleClickSignUp}
+                            initialButtonText={literals.signUp}
+                            {...{ buttonToChange }}
+                        />
+                    </StyledRenderEvents>
+                );
+            }
+        }
+        return pageEvents;
     };
 
     return (

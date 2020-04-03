@@ -15,7 +15,7 @@ const StyledInput = styled.input`
     }
 
     &:before {
-        content: ${({ label }) => `'${label}'`};
+        content: ${({ label }): string => `'${label}'`};
         margin-right: 0.5em;
         color: ${Theme.colors.gray};
     }

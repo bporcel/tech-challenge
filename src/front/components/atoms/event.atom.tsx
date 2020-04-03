@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import Theme from '../../styles/theme';
 
 const StyledDiv = styled.div`
-    ${props =>
+    ${(props): void =>
         (props.location &&
             css`
                 font-size: ${Theme.font.size.body2};

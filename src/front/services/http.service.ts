@@ -1,4 +1,4 @@
-export const get = function <T>(endPoint: string) {
+export const get = function <T>(endPoint: string): Promise<T> {
     return new Promise<T>((resolve, reject): void => {
         window
             .fetch(endPoint)

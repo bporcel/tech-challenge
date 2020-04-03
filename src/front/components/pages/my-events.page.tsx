@@ -11,7 +11,7 @@ const MyEvents: React.FC = () => {
     const [cities, setCities] = useState<Cities[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const mapEventsAndCities = eventsRes => {
+    const mapEventsAndCities = (eventsRes): Events[] => {
         eventsRes.forEach(eventGroup => {
             eventGroup.events.forEach((event, index) => {
                 const found = cities.find(city => city.id === event.city);
@@ -69,7 +69,7 @@ const MyEvents: React.FC = () => {
                 getMyEvents();
 
                 if (
-                    events[i].events.length <= 1 &&
+                    1 >= events[i].events.length &&
                     1 === events.length % 5 &&
                     1 < events.length
                 ) {

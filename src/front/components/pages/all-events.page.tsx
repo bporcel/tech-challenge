@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
     getCities,
     getEvents,
@@ -18,6 +18,24 @@ const AllEvents: React.FC = () => {
     const events = useRef<EventsResponse[]>([]);
     const normalizedEvents = useRef<Events[]>([]);
 
+    const mapEventsAndCities = useCallback(
+        (eventsRes): Events[] => {
+            eventsRes.forEach(eventGroup => {
+                eventGroup.events.forEach((event, index) => {
+                    const found = cities.find(city => city.id === event.city);
+                    found &&
+                        (eventGroup.events[index] = {
+                            ...event,
+                            city: found.name,
+                        });
+                });
+            });
+
+            return eventsRes;
+        },
+        [cities]
+    );
+
     useEffect(() => {
         getCities().then(setCities);
     }, []);
@@ -33,21 +51,6 @@ const AllEvents: React.FC = () => {
             });
         }
     }, [cities]);
-
-    const mapEventsAndCities = eventsRes => {
-        eventsRes.forEach(eventGroup => {
-            eventGroup.events.forEach((event, index) => {
-                const found = cities.find(city => city.id === event.city);
-                found &&
-                    (eventGroup.events[index] = {
-                        ...event,
-                        city: found.name,
-                    });
-            });
-        });
-
-        return eventsRes;
-    };
 
     const findKeyInEvent = (filterValues, event): boolean => {
         let found = true;
@@ -76,7 +79,7 @@ const AllEvents: React.FC = () => {
         return found;
     };
 
-    const checkTime = (filterValues, event) => {
+    const checkTime = (filterValues, event): boolean => {
         let found = true;
 
         if (event.from < filterValues.from || event.from > filterValues.to) {

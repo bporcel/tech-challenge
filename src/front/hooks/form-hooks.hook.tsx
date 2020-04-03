@@ -3,7 +3,7 @@ import { useState } from 'react';
 const useFormState: Function = initialValues => {
     const [fields, setFields] = useState(initialValues);
 
-    const handleChange = target => {
+    const handleChange = (target): void => {
         const { id, value, checked, type } = target;
         if ('reset' === id) {
             let auxFields;

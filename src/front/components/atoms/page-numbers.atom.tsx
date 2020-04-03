@@ -25,7 +25,7 @@ const PageNumbers: React.FC<Props> = ({
                 <ControlledButton
                     text="Previous"
                     page
-                    handleClick={() => setCurrentPage(currentPage - 1)}
+                    handleClick={(): void => setCurrentPage(currentPage - 1)}
                 />
             )}
             <ControlledButton text={`${currentPage}`} />
@@ -33,7 +33,7 @@ const PageNumbers: React.FC<Props> = ({
                 <ControlledButton
                     text="Next"
                     page
-                    handleClick={() => setCurrentPage(currentPage + 1)}
+                    handleClick={(): void => setCurrentPage(currentPage + 1)}
                 />
             )}
         </StyledPageNumbers>

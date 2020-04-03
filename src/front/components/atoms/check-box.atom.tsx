@@ -13,7 +13,7 @@ const StyledLabel = styled.label`
     &:hover {
         cursor: pointer;
     }
-    ${props =>
+    ${(props): void =>
         props.checked &&
         css`
             background-color: ${Theme.colors.green};
@@ -38,7 +38,7 @@ interface Props {
     id: string;
     label: string;
     checked: boolean;
-    handleChange: any;
+    handleChange: Function;
 }
 
 const CheckBox: React.FC<Props> = ({ id, label, checked, handleChange }) => {
