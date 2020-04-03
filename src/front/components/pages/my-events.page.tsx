@@ -68,8 +68,11 @@ const MyEvents: React.FC = () => {
                 sessionStorage.removeItem(`${found.id}`);
                 getMyEvents();
 
-                console.log('events', events)
-                if (1 === events.length % 5 && 2 < events.length) {
+                if (
+                    events[i].events.length <= 1 &&
+                    1 === events.length % 5 &&
+                    1 < events.length
+                ) {
                     setCurrentPage(currentPage - 1);
                 }
                 break;
