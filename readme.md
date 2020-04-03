@@ -39,3 +39,17 @@ npm run build-back:pro
 ```
 
 Go to http://localhost:3000.
+
+#### Docker
+
+-   Build image
+
+```
+docker build . -t [image-name]
+```
+
+-   Run image
+
+```
+docker run -p 8080:8080 [image-name]
+```
