@@ -38,7 +38,7 @@ npm run build-front:pro
 npm run build-back:pro
 ```
 
-Go to http://localhost:3000.
+Go to http://0.0.0.0:8080.
 
 #### Docker
 
