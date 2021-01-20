@@ -5,12 +5,13 @@ import Theme from '../../styles/theme';
 import literals from '../../resources/i18n/en.json';
 // eslint-disable-next-line
 // @ts-ignore
-import logo from '../../resources/images/newlogo.png';
+import logo from '../../resources/images/logo.png';
 
 const StyledLi = styled.li`
     & a {
         text-decoration: none;
         color: ${Theme.colors.darkGray};
+        font-size: 16px;
     }
 
     & a.active {
@@ -23,7 +24,7 @@ const StyledLi = styled.li`
 `;
 
 const StyledImg = styled.img`
-    width: 20%;
+    width: 30%;
 `;
 
 const StyledHeader = styled.div`
